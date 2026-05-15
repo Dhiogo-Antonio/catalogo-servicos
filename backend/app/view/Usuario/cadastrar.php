@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Usuário</title>
 </head>
+
 <body>
     <form method="post">
        <label for="nome">Nome:</label>
@@ -26,6 +27,7 @@
        <input type="submit">
     </form>
 </body>
+
 </html>
 
 <?php

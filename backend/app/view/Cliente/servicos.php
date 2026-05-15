@@ -9,7 +9,7 @@ $servicoController = new ServicoController($pdo);
 
 $servicos = $servicoController->listar();
 
-?>
+?>     
 
 <h1>Serviços</h1>
 

@@ -6,6 +6,8 @@ if (empty($usuarios)) {
     return;
 }
 
+
+
 echo "<table border='1' cellpadding='5' cellspacing='0'>";
 echo "<tr><td><a href='view/Usuario/cadastrar.php'>Cadastrar</a></td></tr>";
 echo "<tr><th>ID</th><th>Nome</th><th>E-mail</th><th>Telefone</th><th>Tipo</th><th>Ações</th></tr>";
