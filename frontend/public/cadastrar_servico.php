@@ -16,7 +16,7 @@
 $erro = '';
 $sucesso = '';
 $nomeServico = '';
-$descricao = '';
+$descricao = '';  
 $preco = '';
 $prazo = '';
 $categoria = '';
