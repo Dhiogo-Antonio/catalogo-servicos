@@ -33,7 +33,7 @@ $servicos = $servicoController->listar();
 
         <nav>
             <a href="index.php">Início</a>
-            <a href="servicos.php">Serviços</a>
+            <a href="servicos/servicos.php">Serviços</a>
             <a href="cadastro.php">Cadastrar</a>
             <a href="login.php" class="btn-login">
                 Entrar
@@ -58,7 +58,7 @@ $servicos = $servicoController->listar();
 
             <div class="hero-buttons">
 
-                <a href="servicos.php" class="btn-primary">
+                <a href="servicos/servicos.php" class="btn-primary">
                     Explorar serviços
                 </a>
 
