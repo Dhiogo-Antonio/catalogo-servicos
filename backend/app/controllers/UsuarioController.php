@@ -18,11 +18,11 @@ class UsuarioController {
         return $usuario;
     }
 
-    public function cadastrar($nome, $email, $senha, $telefone){
-        $this->usuarioModel->cadastrar($nome, $email, $senha, $telefone);
+    public function cadastrar($nome, $email, $senha, $telefone, $tipo){
+        $this->usuarioModel->cadastrar($nome, $email, $senha, $telefone, $tipo);
     }
     
-    public function editar($nome,$email, $senha, $telefone, $id){
+    public function editar($nome,$email, $senha, $telefone, $tipo, $id){
         $this->usuarioModel->editar($nome, $email, $senha, $telefone, $id);
 
     }

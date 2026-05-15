@@ -1,7 +1,7 @@
 <?php
 
-require_once "C:\Turma2\xampp\htdocs\catalogo-servicos\backend\app\database\database.php";
-require_once "C:\Turma2\xampp\htdocs\catalogo-servicos\backend\app\controllers\UsuarioController.php";
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/database.php";
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/UsuarioController.php";
 
 $UsuarioController = new UsuarioController($pdo);
 
@@ -30,6 +30,9 @@ if(isset($_GET['id'])){
        <label for="telefone">Telefone:</label>
        <input type="text" name="telefone" value="<?=$usuario['telefone'];?>" required><br> 
 
+       <label for="tipo">Tipo:</label>
+       <input type="text" name="tipo" value="<?=$usuario['tipo'];?>" required><br> 
+
        <input type="submit">
     </form>
 </body>
@@ -44,8 +47,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     $telefone = $_POST['telefone'];
+    $tipo = $_POST['tipo'];
 
-    $UsuarioController->editar($nome, $email, $senha, $telefone, $id);
+    $UsuarioController->editar($nome, $email, $senha, $telefone, $tipo, $id);
 
     header('Location: ../../../index.php');
 }

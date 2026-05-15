@@ -1,7 +1,7 @@
 <?php
 
-require_once "C:\Turma2\xampp\htdocs\catalogo-servicos\backend\app\database\database.php";
-require_once "C:\Turma2\xampp\htdocs\catalogo-servicos\backend\app\controllers\UsuarioController.php";
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/database.php";
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/UsuarioController.php";
 
 $UsuarioController = new UsuarioController($pdo);
 
