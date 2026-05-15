@@ -1,5 +1,5 @@
 <?php
-require_once "C:\Turma2\xampp\htdocs\catalogo-servicos\backend\app\models\UsuarioModel.php";
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/models/UsuarioModel.php";
 class UsuarioController {
     private $usuarioModel;
    
@@ -9,7 +9,7 @@ class UsuarioController {
     }
     public function listar() {
         $usuarios = $this->usuarioModel->buscarTodos();
-        include_once "C:\Turma2\xampp\htdocs\catalogo-servicos\backend\app\view\Usuario\listar.php";
+        include_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/view/Usuario/listar.php";
         return;
     }
 
