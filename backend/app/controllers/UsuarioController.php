@@ -23,7 +23,7 @@ class UsuarioController {
     }
     
     public function editar($nome,$email, $senha, $telefone, $tipo, $id){
-        $this->usuarioModel->editar($nome, $email, $senha, $telefone, $id);
+        $this->usuarioModel->editar($nome, $email, $senha, $telefone, $tipo, $id);
 
     }
 
