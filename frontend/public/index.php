@@ -89,7 +89,7 @@
             <div class="service-meta">
             <strong>R$ <?= number_format((float) $servico['preco'], 2, ',', '.') ?></strong>
             <span><?= (int) $servico['prazo'] ?> dia(s)</span>
-            </div>
+            </div>    
             <div class="provider">
             <span>Prestador</span>
             <strong><?= htmlspecialchars($servico['prestador']) ?></strong>

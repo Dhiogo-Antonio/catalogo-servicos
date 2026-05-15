@@ -4,7 +4,7 @@ session_start();
        require_once __DIR__ . '/../../backend/app/database/database.php';
 
        $erro = '';
-       $sucesso = '';
+       $sucesso = '';   
        $nome = '';
        $email = '';
        $telefone = '';

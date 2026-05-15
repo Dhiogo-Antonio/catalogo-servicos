@@ -6,7 +6,7 @@
        if (!isset($_SESSION['usuario_id'])) {
        header('Location: login.php');
        exit;
-}
+}        
 
        if (($_SESSION['usuario_tipo'] ?? '') !== 'prestador') {
        header('Location: index.php');
