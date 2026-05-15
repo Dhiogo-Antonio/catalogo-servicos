@@ -19,6 +19,10 @@
        <label for="telefone">Telefone:</label>
        <input type="text" name="telefone" required><br> 
 
+       <label for="tipo">Tipo:</label>
+       <input type="text" name="tipo" required><br> 
+
+
        <input type="submit">
     </form>
 </body>
@@ -26,8 +30,8 @@
 
 <?php
 
-require_once "C:\Turma2\xampp\htdocs\catalogo-servicos\backend\app\database\database.php";
-require_once "C:\Turma2\xampp\htdocs\catalogo-servicos\backend\app\controllers\UsuarioController.php";
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/database.php";
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/UsuarioController.php";
 
 $UsuarioController = new UsuarioController($pdo);
 
@@ -36,8 +40,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $email = $_POST['email'];
     $senha = $_POST['senha'];
     $telefone = $_POST['telefone'];
+    $tipo = $_POST['tipo'];
 
-    $UsuarioController->cadastrar($nome, $email, $senha, $telefone);
+    $UsuarioController->cadastrar($nome, $email, $senha, $telefone, $tipo);
     header('Location: ../../../index.php');
 }
 
