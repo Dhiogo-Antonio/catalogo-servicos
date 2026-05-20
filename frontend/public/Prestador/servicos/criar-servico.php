@@ -65,11 +65,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         href="../css/style.css"
     >
 
-    <link rel="stylesheet" href="../css/criar-servico.css">
+    <link rel="stylesheet" href="../../css/criar-servico.css">
 
 
 </head>
 <body>
+    <header>
+
+        <div class="logo">
+            Catálogo de Serviços
+        </div>
+
+        <nav>
+
+            <a href="../../home.php">
+                Voltar
+            </a>
+
+
+        </nav>
+
+    </header>
 
 <div class="page">
 

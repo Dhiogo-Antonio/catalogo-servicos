@@ -7,9 +7,12 @@ require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/data
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ServicoController.php";
 
 
+
 $servicoController = new ServicoController($pdo);
 
+
 $servicos = $servicoController->listar();
+
 
 ?>
 
@@ -42,10 +45,6 @@ $servicos = $servicoController->listar();
 
             <a href="Prestador/servicos/meus-servicos.php">
                 Meus serviços
-            </a>
-
-            <a href="servicos/criar.php">
-                Criar serviço
             </a>
 
         <?php endif; ?>
@@ -133,61 +132,92 @@ $servicos = $servicoController->listar();
 
     <section class="servicos">
 
-        <h2 class="section-title">
-            Serviços em destaque
-        </h2>
+    <h2 class="section-title">
+        Serviços em destaque
+    </h2>
 
-        <div class="servicos-grid">
+    <div class="servicos-grid">
 
-            <?php foreach($servicos as $servico): ?>
+        <?php foreach($servicos as $servico): ?>
 
-                <div class="card-servico">
+            <div class="card-servico">
 
-                    <div class="card-img"></div>
+                <div class="top-card">
 
-                    <div class="card-content">
+                    <div class="perfil-area">
 
-                        <h3>
-                            <?= $servico['titulo'] ?>
-                        </h3>
+                        <img 
+                            src="<?= !empty($servico['foto']) ? $servico['foto'] : '../img/user.jpg' ?>"
+                            alt="Prestador"
+                            class="foto-prestador"
+                        >
 
-                        <p class="descricao">
-                            <?= $servico['descricao_curta'] ?>
-                        </p>
+                        <div class="perfil-info">
 
-                        <div class="info">
-                            <span>
-                                <?= $servico['prazo'] ?> dias
+                            <span class="nome-prestador">
+                                <?= $servico['prestador'] ?>
                             </span>
 
-                            <span>
-                                ⭐ <?= $servico['avaliacao'] ?>
-                            </span>
-                        </div>
+                            <h3>
+                                <?= $servico['nome_servico'] ?>
+                            </h3>
 
-                        <div class="preco">
-                            R$ <?= $servico['preco'] ?>
                         </div>
-
-                        <div class="prestador">
-                            Prestador:
-                            <?= $servico['prestador'] ?>
-                        </div>
-
-                        <a href="servico.php?id=<?= $servico['id'] ?>"
-                           class="btn-servico">
-                            Ver serviço
-                        </a>
 
                     </div>
 
                 </div>
 
-            <?php endforeach; ?>
+                <div class="card-content">
 
-        </div>
+                    <p class="descricao">
+                        <?= $servico['descricao'] ?>
+                    </p>
 
-    </section>
+                    <div class="info-servico">
+
+                        <div class="info-box">
+
+                            <span class="label">
+                                Prazo
+                            </span>
+
+                            <strong>
+                                <?= $servico['prazo'] ?> dias
+                            </strong>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <span class="label">
+                                Preço
+                            </span>
+
+                            <strong class="preco">
+                                R$ <?= number_format($servico['preco'], 2, ',', '.') ?>
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <a 
+                        href="servico.php?id=<?= $servico['id'] ?>"
+                        class="btn-contratar"
+                    >
+                        Contratar
+                    </a>
+
+                </div>
+
+            </div>
+
+        <?php endforeach; ?>
+
+    </div>
+
+</section>
 
 
     <footer>

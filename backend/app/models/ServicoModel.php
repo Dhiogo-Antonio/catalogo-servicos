@@ -11,17 +11,18 @@ class ServicoModel {
     
     public function listar(){
 
-        $sql = "SELECT 
-                    s.*,
-                    u.nome AS prestador,
-                    c.nome AS categoria
-                FROM servicos s
-                INNER JOIN usuarios u ON u.id = s.usuario_id
-                INNER JOIN categorias c ON c.id = s.categoria_id
-                ORDER BY s.id DESC";
+    $sql = "SELECT 
+                s.*,
+                u.nome AS prestador,
+                u.foto,
+                c.nome AS categoria
+            FROM servicos s
+            INNER JOIN usuarios u ON u.id = s.usuario_id
+            INNER JOIN categorias c ON c.id = s.categoria_id
+            ORDER BY s.id DESC";
 
-        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-    }
+    return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+}
 
     public function listarPorPrestador($usuarioId){
 

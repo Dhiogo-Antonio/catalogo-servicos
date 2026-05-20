@@ -162,78 +162,133 @@
         }
 
         .servicos{
-            padding:60px 8%;
-        }
+    padding:70px 8%;
+    background:#f8fafc;
+}
 
-        .servicos-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
-            gap:25px;
-        }
+.section-title{
+    font-size:38px;
+    margin-bottom:40px;
+    color:#111827;
+    font-weight:700;
+}
 
-        .card-servico{
-            background:#fff;
-            border-radius:18px;
-            overflow:hidden;
-            box-shadow:0 4px 15px rgba(0,0,0,.06);
-            transition:.3s;
-        }
+.servicos-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
+    gap:30px;
+}
 
-        .card-servico:hover{
-            transform:translateY(-5px);
-        }
+.card-servico{
+    background:#fff;
+    border-radius:22px;
+    overflow:hidden;
+    border:1px solid #e5e7eb;
+    transition:.3s;
+    position:relative;
+}
 
-        .card-img{
-            width:100%;
-            height:180px;
-            background:#dbeafe;
-        }
+.card-servico:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,.08);
+}
 
-        .card-content{
-            padding:20px;
-        }
+.top-card{
+    padding:25px 25px 10px;
+}
 
-        .card-content h3{
-            margin-bottom:10px;
-            font-size:22px;
-        }
+.perfil-area{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
 
-        .descricao{
-            color:#555;
-            margin-bottom:15px;
-            line-height:1.5;
-        }
+.foto-prestador{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #2563eb;
+}
 
-        .info{
-            display:flex;
-            justify-content:space-between;
-            margin-bottom:15px;
-            font-size:14px;
-            color:#444;
-        }
+.perfil-info{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
 
-        .preco{
-            font-size:24px;
-            font-weight:bold;
-            color:#2563eb;
-            margin-bottom:15px;
-        }
+.nome-prestador{
+    color:#6b7280;
+    font-size:14px;
+    font-weight:500;
+}
 
-        .prestador{
-            margin-bottom:20px;
-            color:#666;
-        }
+.perfil-info h3{
+    font-size:22px;
+    color:#111827;
+    line-height:1.3;
+}
 
-        .btn-servico{
-            display:block;
-            text-align:center;
-            text-decoration:none;
-            background:#111827;
-            color:#fff;
-            padding:14px;
-            border-radius:10px;
-        }
+.card-content{
+    padding:0 25px 25px;
+}
 
+.descricao{
+    color:#4b5563;
+    line-height:1.7;
+    margin:20px 0 25px;
+    min-height:90px;
+}
+
+.info-servico{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.info-box{
+    flex:1;
+    background:#f3f4f6;
+    padding:16px;
+    border-radius:14px;
+}
+
+.label{
+    display:block;
+    color:#6b7280;
+    font-size:13px;
+    margin-bottom:6px;
+}
+
+.info-box strong{
+    font-size:18px;
+    color:#111827;
+}
+
+.preco{
+    color:#2563eb !important;
+    font-size:24px !important;
+}
+
+.btn-contratar{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:16px;
+    background:linear-gradient(135deg, #2563eb, #1d4ed8);
+    color:#fff;
+    text-decoration:none;
+    border-radius:14px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-contratar:hover{
+    transform:scale(1.02);
+    opacity:.95;
+}
         footer{
             margin-top:60px;
             background:#111827;

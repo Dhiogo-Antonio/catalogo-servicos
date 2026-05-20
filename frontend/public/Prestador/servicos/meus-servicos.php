@@ -46,7 +46,7 @@ $servicos = $servicoController->listarPorPrestador($prestadorId);
 
         <nav>
 
-            <a href="../home.php">
+            <a href="../../home.php">
                 Voltar
             </a>
 
