@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15/05/2026 às 12:49
+-- Tempo de geração: 20/05/2026 às 13:37
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -33,6 +33,17 @@ CREATE TABLE `categorias` (
   `icone` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `categorias`
+--
+
+INSERT INTO `categorias` (`id`, `nome`, `icone`) VALUES
+(1, 'Design', 'fa-palette'),
+(2, 'Marketing', 'fa-bullhorn'),
+(3, 'Desenvolvimento', 'fa-code'),
+(4, 'Consultoria', 'fa-briefcase'),
+(5, 'Manutenção', 'fa-screwdriver-wrench');
+
 -- --------------------------------------------------------
 
 --
@@ -48,12 +59,16 @@ CREATE TABLE `servicos` (
   `preco` decimal(10,2) NOT NULL,
   `prazo` int(11) NOT NULL,
   `imagem` varchar(255) DEFAULT NULL,
-  `disponibilidade` tinyint(1) DEFAULT 1,
-  `avaliacao` decimal(2,1) DEFAULT 0.0,
-  `total_avaliacoes` int(11) DEFAULT 0,
   `localizacao` varchar(255) DEFAULT NULL,
   `criado_em` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `servicos`
+--
+
+INSERT INTO `servicos` (`id`, `usuario_id`, `categoria_id`, `nome_servico`, `descricao`, `preco`, `prazo`, `imagem`, `localizacao`, `criado_em`) VALUES
+(5, 6, 3, 'Mantenção de servidores', 'sdsds', 45.00, 10, NULL, NULL, '2026-05-20 10:59:55');
 
 -- --------------------------------------------------------
 
@@ -66,12 +81,22 @@ CREATE TABLE `usuarios` (
   `nome` varchar(100) NOT NULL,
   `email` varchar(255) NOT NULL,
   `senha` varchar(255) NOT NULL,
-  `foto` varchar(255) DEFAULT NULL,
   `telefone` varchar(20) DEFAULT NULL,
   `tipo` enum('cliente','prestador','admin') DEFAULT 'cliente',
-  `descricao` text DEFAULT NULL,
   `criado_em` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `telefone`, `tipo`, `criado_em`) VALUES
+(1, 'dhiogo', 'dhiogo@gmail', '1234', '1899984674', 'cliente', '2026-05-15 14:12:45'),
+(2, 'Vitor', 'vitor@gmail', '1234', '1899984667', 'cliente', '2026-05-15 14:16:05'),
+(3, 'Gabriel Machado', 'gabriel@gmail', '1234', '18999846742', 'cliente', '2026-05-15 14:33:44'),
+(4, 'Karol', 'karol@gmail', '1234', '1899984667', 'cliente', '2026-05-15 14:35:19'),
+(5, 'Aidan', 'aidan@gmail', '1234', '999090908', 'cliente', '2026-05-15 14:39:39'),
+(6, 'dhiogo', 'admin@gmail.com', '1234', '18999846748', 'prestador', '2026-05-15 14:42:00');
 
 --
 -- Índices para tabelas despejadas
@@ -106,19 +131,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `servicos`
 --
 ALTER TABLE `servicos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restrições para tabelas despejadas

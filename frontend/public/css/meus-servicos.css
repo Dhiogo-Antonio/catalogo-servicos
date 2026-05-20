@@ -10,7 +10,7 @@ body {
     color: #1f2937;
 }
 
-/* HEADER */
+
 
 header {
     width: 100%;
@@ -55,7 +55,6 @@ nav a {
     background: #1d478a;
 }
 
-/* SECTION */
 
 .servicos {
     width: min(1200px, calc(100% - 40px));
@@ -67,7 +66,6 @@ nav a {
     margin-bottom: 30px;
 }
 
-/* GRID */
 
 .servicos-grid {
     display: grid;
@@ -75,7 +73,7 @@ nav a {
     gap: 24px;
 }
 
-/* CARD */
+
 
 .card-servico {
     background: white;
@@ -93,7 +91,7 @@ nav a {
     box-shadow: 0 18px 35px rgba(0,0,0,0.08);
 }
 
-/* TITULO */
+
 
 .card-servico h3 {
     font-size: 1.3rem;
@@ -101,7 +99,7 @@ nav a {
     color: #111827;
 }
 
-/* DESCRIÇÃO */
+
 
 .descricao {
     color: #6b7280;
@@ -115,7 +113,7 @@ nav a {
     overflow: hidden;
 }
 
-/* INFO */
+
 
 .info {
     display: flex;
@@ -126,7 +124,7 @@ nav a {
     color: #4b5563;
 }
 
-/* PREÇO */
+
 
 .preco {
     font-size: 1.5rem;
@@ -156,7 +154,7 @@ nav a {
     transition: 0.2s;
 }
 
-/* EDITAR */
+
 
 .acoes button:first-child {
     border: none;
@@ -169,7 +167,7 @@ nav a {
     background: #dbe4ff;
 }
 
-/* EXCLUIR */
+
 
 .acoes a:last-child {
     background: #fee2e2;
