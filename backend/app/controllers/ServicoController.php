@@ -2,67 +2,77 @@
 
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/models/ServicoModel.php";
 
-class ServicoController {
+class ServicoController
+{
 
     private $servicoModel;
 
-    public function __construct($pdo) {
+    public function __construct($pdo)
+    {
         $this->servicoModel = new ServicoModel($pdo);
     }
 
-    public function listar() {
+    // LISTAR TODOS (HOME)
+    public function listar()
+    {
         return $this->servicoModel->listar();
     }
 
-    public function listarPorUsuario($usuarioId) {
-        return $this->servicoModel->listarPorUsuario($usuarioId);
+    // LISTAR POR PRESTADOR
+    public function listarPorPrestador($prestadorId)
+    {
+        return $this->servicoModel->listarPorPrestador($prestadorId);
     }
 
-    public function buscarPorId($id) {
+    // BUSCAR POR ID
+    public function buscarPorId($id)
+    {
         return $this->servicoModel->buscarPorId($id);
     }
 
+    // CRIAR SERVIÇO
     public function criar(
-        $usuarioId,
-        $categoriaId,
-        $nomeServico,
+        $titulo,
+        $descricaoCurta,
         $descricao,
         $preco,
         $prazo,
-        $imagem = null,
-        $localizacao = null
+        $usuarioId,
+        $categoriaId
     ) {
         return $this->servicoModel->criar(
-            $usuarioId,
-            $categoriaId,
-            $nomeServico,
+            $titulo,
+            $descricaoCurta,
             $descricao,
             $preco,
             $prazo,
-            $imagem,
-            $localizacao
+            $usuarioId,
+            $categoriaId
         );
     }
 
+    // EDITAR SERVIÇO
     public function editar(
         $id,
-        $categoriaId,
-        $nomeServico,
+        $nome_servico,
         $descricao,
         $preco,
-        $prazo
+        $prazo,
+        $categoria_id
+
     ) {
         return $this->servicoModel->editar(
-            $id,
-            $categoriaId,
-            $nomeServico,
-            $descricao,
-            $preco,
-            $prazo
+        $id,
+        $nome_servico,
+        $descricao,
+        $preco,
+        $prazo,
+        $categoria_id
         );
     }
 
-    public function deletar($id) {
+    public function deletar($id)
+    {
         return $this->servicoModel->deletar($id);
     }
 }

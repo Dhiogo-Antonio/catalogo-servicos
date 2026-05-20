@@ -7,7 +7,7 @@ $ServicoController = new ServicoController($pdo);
 
 if(isset($_GET['id'])){
     $id = $_GET['id'];
-    $servico = $ServicoController->buscarServico($id);
+    $servico = $ServicoController->buscarPorId($id);
 }
 ?>
 <!DOCTYPE html>

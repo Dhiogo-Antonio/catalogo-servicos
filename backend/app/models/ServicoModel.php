@@ -1,36 +1,157 @@
 <?php
 
 class ServicoModel {
+
     private $pdo;
 
-    public function __construct($pdo) {
+    public function __construct($pdo){
         $this->pdo = $pdo;
     }
 
-    public function listar() {
-        $stmt = $this->pdo->query("SELECT s.*, c.nome AS categoria FROM servicos s LEFT JOIN categorias c ON s.categoria_id = c.id");
+    
+    public function listar(){
+
+        $sql = "SELECT 
+                    s.*,
+                    u.nome AS prestador,
+                    c.nome AS categoria
+                FROM servicos s
+                INNER JOIN usuarios u ON u.id = s.usuario_id
+                INNER JOIN categorias c ON c.id = s.categoria_id
+                ORDER BY s.id DESC";
+
+        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function listarPorPrestador($usuarioId){
+
+        $sql = "SELECT 
+                    s.*,
+                    c.nome AS categoria
+                FROM servicos s
+                INNER JOIN categorias c ON c.id = s.categoria_id
+                WHERE s.usuario_id = ?
+                ORDER BY s.id DESC";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute([$usuarioId]);
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function buscarServico($id){
-        $stmt = $this->pdo->prepare("SELECT * FROM servicos WHERE id = ?");
+    
+    public function listarPorCategoria($categoriaId){
+
+        $sql = "SELECT 
+                    s.*,
+                    u.nome AS prestador,
+                    c.nome AS categoria
+                FROM servicos s
+                INNER JOIN usuarios u ON u.id = s.usuario_id
+                INNER JOIN categorias c ON c.id = s.categoria_id
+                WHERE s.categoria_id = ?";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute([$categoriaId]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+ 
+    public function buscarPorId($id){
+
+        $sql = "SELECT 
+                    s.*,
+                    u.nome AS prestador,
+                    c.nome AS categoria
+                FROM servicos s
+                INNER JOIN usuarios u ON u.id = s.usuario_id
+                INNER JOIN categorias c ON c.id = s.categoria_id
+                WHERE s.id = ?";
+
+        $stmt = $this->pdo->prepare($sql);
+
         $stmt->execute([$id]);
+
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function cadastrar($nome_servico, $descricao, $preco, $categoria_id, $prazo, $disponibilidade, $avaliacao, $localizacao){
-        $stmt = $this->pdo->prepare("INSERT INTO servicos (nome, descricao, preco, categoria_id, prazo, disponibilidade, avaliacao, localizacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$nome_servico, $descricao, $preco, $categoria_id, $prazo, $disponibilidade, $avaliacao, $localizacao]);
-    }
+    
+    public function criar(
+    $usuarioId,
+    $categoriaId,
+    $nomeServico,
+    $descricao,
+    $preco,
+    $prazo,
+    $imagem = null
+){
 
-    public function editar($nome_servico, $descricao, $preco, $prazo, $disponibilidade, $avaliacao, $localizacao, $id){
-        $stmt = $this->pdo->prepare("UPDATE servicos SET nome = ?, descricao = ?, preco = ?, prazo = ?, disponibilidade = ?, avaliacao = ?, localizacao = ? WHERE id = ?");
-        $stmt->execute([$nome_servico, $descricao, $preco, $prazo, $disponibilidade, $avaliacao, $localizacao, $id]);
-    }
+    $sql = "INSERT INTO servicos 
+    (
+        usuario_id,
+        categoria_id,
+        nome_servico,
+        descricao,
+        preco,
+        prazo,
+        imagem
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+    $stmt = $this->pdo->prepare($sql);
+
+    return $stmt->execute([
+        $usuarioId,
+        $categoriaId,
+        $nomeServico,
+        $descricao,
+        $preco,
+        $prazo,
+        $imagem
+    ]);
+}
+
+    
+    public function editar(
+    $id,
+    $nome_servico,
+    $descricao,
+    $preco,
+    $prazo,
+    $categoria_id
+){
+
+    $sql = "UPDATE servicos
+            SET 
+                categoria_id = ?,
+                nome_servico = ?,
+                descricao = ?,
+                preco = ?,
+                prazo = ?
+            WHERE id = ?";
+
+    $stmt = $this->pdo->prepare($sql);
+
+    return $stmt->execute([
+        $categoria_id,
+        $nome_servico,
+        $descricao,
+        $preco,
+        $prazo,
+        $id
+    ]);
+}
 
     public function deletar($id){
-        $stmt = $this->pdo->prepare("DELETE FROM servicos WHERE id = ?");
+
+        $sql = "DELETE FROM servicos WHERE id = ?";
+
+        $stmt = $this->pdo->prepare($sql);
+
         return $stmt->execute([$id]);
     }
+
 }
-?>
