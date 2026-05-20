@@ -32,22 +32,22 @@ class ServicoController
 
     // CRIAR SERVIÇO
     public function criar(
-        $titulo,
-        $descricaoCurta,
-        $descricao,
-        $preco,
-        $prazo,
         $usuarioId,
-        $categoriaId
+    $categoriaId,
+    $nomeServico,
+    $descricao,
+    $preco,
+    $prazo,
+    $localizacao
     ) {
         return $this->servicoModel->criar(
-            $titulo,
-            $descricaoCurta,
-            $descricao,
-            $preco,
-            $prazo,
-            $usuarioId,
-            $categoriaId
+           $usuarioId,
+    $categoriaId,
+    $nomeServico,
+    $descricao,
+    $preco,
+    $prazo,
+    $localizacao
         );
     }
 

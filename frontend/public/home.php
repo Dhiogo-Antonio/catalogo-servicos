@@ -21,6 +21,7 @@ $servicos = $servicoController->listar();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/home.css">
     <title>Catálogo de Serviços</title>
 
@@ -35,11 +36,11 @@ $servicos = $servicoController->listar();
             Catálogo Serviços
         </div>
 
-         <nav>
+        <nav>
 
-            <?php if(isset($_SESSION['usuario'])): ?>
+            <?php if (isset($_SESSION['usuario'])): ?>
 
-                <?php if($_SESSION['usuario']['tipo'] === 'prestador'): ?>
+                <?php if ($_SESSION['usuario']['tipo'] === 'prestador'): ?>
 
                     <a href="Prestador/servicos/meus-servicos.php">
                         Meus serviços
@@ -166,7 +167,12 @@ $servicos = $servicoController->listar();
                     <div class="card-content">
 
                         <p class="descricao">
-                            <?= $servico['descricao'] ?>
+    <?= mb_strimwidth($servico['descricao'], 0, 120, '...') ?>
+</p>
+
+                        <p class="localizacao">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <?= $servico['localizacao'] ?>
                         </p>
 
                         <div class="info-servico">
@@ -202,11 +208,19 @@ $servicos = $servicoController->listar();
                             $_SESSION['usuario']['tipo'] === 'prestador'
                         ): ?>
 
-                            <a
-                                href="servico.php?id=<?= $servico['id'] ?>"
-                                class="btn-ver-servico">
+                            <button
+                                class="btn-ver-servico"
+                                onclick="abrirModalServico(
+        '<?= $servico['nome_servico'] ?>',
+        '<?= $servico['prestador'] ?>',
+        '<?= $servico['descricao'] ?>',
+        '<?= $servico['prazo'] ?>',
+        '<?= $servico['preco'] ?>',
+        '<?= $servico['localizacao'] ?>',
+        '<?= !empty($servico['foto']) ? $servico['foto'] : 'img/user.png' ?>'
+    )">
                                 Ver serviço
-                            </a>
+                            </button>
 
                         <?php else: ?>
 
@@ -235,6 +249,113 @@ $servicos = $servicoController->listar();
         </p>
     </footer>
 
+
+    <div class="modal-servico" id="modalServico">
+
+    <div class="modal-box">
+
+        <span
+            class="fechar-modal"
+            onclick="fecharModalServico()"
+        >
+            &times;
+        </span>
+
+        <div class="modal-topo">
+
+            <img
+                src=""
+                id="modal-foto"
+                class="modal-foto"
+            >
+
+            <div>
+
+                <span class="modal-prestador" id="modal-prestador"></span>
+
+                <h2 id="modal-titulo"></h2>
+
+            </div>
+
+        </div>
+
+        <div class="modal-info">
+
+            <p id="modal-descricao"></p>
+
+            <div class="modal-detalhes">
+
+                <div class="detalhe-box">
+
+                    <span>
+                        Prazo
+                    </span>
+
+                    <strong id="modal-prazo"></strong>
+
+                </div>
+
+                <div class="detalhe-box">
+
+                    <span>
+                        Preço
+                    </span>
+
+                    <strong id="modal-preco"></strong>
+
+                </div>
+
+            </div>
+
+            <div class="modal-localizacao">
+
+                📍 <span id="modal-localizacao"></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 </body>
 
 </html>
+<script>
+
+function abrirModalServico(
+    nome,
+    prestador,
+    descricao,
+    prazo,
+    preco,
+    localizacao,
+    foto
+){
+
+    document.getElementById('modal-titulo').innerText = nome;
+
+    document.getElementById('modal-prestador').innerText = prestador;
+
+    document.getElementById('modal-descricao').innerText = descricao;
+
+    document.getElementById('modal-prazo').innerText = prazo + ' dias';
+
+    document.getElementById('modal-preco').innerText =
+        'R$ ' + parseFloat(preco).toFixed(2);
+
+    document.getElementById('modal-localizacao').innerText =
+        localizacao;
+
+    document.getElementById('modal-foto').src = foto;
+
+    document.getElementById('modalServico').style.display = 'flex';
+}
+
+function fecharModalServico(){
+
+    document.getElementById('modalServico').style.display = 'none';
+}
+
+</script>

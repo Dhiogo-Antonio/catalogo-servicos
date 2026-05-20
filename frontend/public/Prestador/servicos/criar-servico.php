@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $descricao,
     $preco,
     $prazo,
-    null
+    $localizacao
 
 );
 

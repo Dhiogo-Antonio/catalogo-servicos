@@ -87,7 +87,7 @@ class ServicoModel {
     $descricao,
     $preco,
     $prazo,
-    $imagem = null
+    $localizacao
 ){
 
     $sql = "INSERT INTO servicos 
@@ -98,7 +98,7 @@ class ServicoModel {
         descricao,
         preco,
         prazo,
-        imagem
+        localizacao
     )
     VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -111,7 +111,7 @@ class ServicoModel {
         $descricao,
         $preco,
         $prazo,
-        $imagem
+        $localizacao
     ]);
 }
 
