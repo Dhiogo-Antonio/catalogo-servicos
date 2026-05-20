@@ -8,6 +8,7 @@
     >
 
     <title>Catálogo de Serviços</title>
+    <link rel="stylesheet" href="css/style.css">
 
     <link
         rel="stylesheet"
