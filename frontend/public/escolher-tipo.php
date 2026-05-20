@@ -270,7 +270,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 >
 
                     <div class="icon">
-                        <img src="../img/maleta.png" alt="" width="50px">
+                        <img src="../img/pessoa.png" alt="" width="50px">
                     </div>
 
                     <h2>
@@ -312,7 +312,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 >
 
                     <div class="icon">
-                        <img src="../img/pessoa.png" alt="" width="50px">
+                        <img src="../img/maleta.png" alt="" width="50px">
                     </div>
 
                     <h2>
