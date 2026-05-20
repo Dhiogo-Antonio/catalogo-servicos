@@ -65,76 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         href="../css/style.css"
     >
 
-    <style>
+    <link rel="stylesheet" href="../css/criar-servico.css">
 
-        .page {
-            width: min(700px, calc(100% - 32px));
-            margin: 40px auto;
-        }
-
-        .form-box {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid #dde3ee;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-
-        .form-box h1 {
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #c8d2df;
-            border-radius: 8px;
-            outline: none;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 14px;
-            background: #2557a7;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn-submit:hover {
-            background: #1d478a;
-        }
-
-        .mensagem {
-            margin-bottom: 16px;
-            padding: 12px;
-            border-radius: 8px;
-            background: #e4f7eb;
-            color: #1f6f43;
-            font-weight: bold;
-        }
-
-    </style>
 
 </head>
 <body>

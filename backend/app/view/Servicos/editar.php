@@ -3,11 +3,11 @@
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/database.php";
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ServicoController.php";
 
-$ServicoController = new ServicoController($pdo);
+$servicoController = new ServicoController($pdo);
 
 if(isset($_GET['id'])){
     $id = $_GET['id'];
-    $servico = $ServicoController->buscarPorId($id);
+    $servico = $servicoController->buscarPorId($id);
 }
 ?>
 <!DOCTYPE html>
@@ -51,11 +51,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $descricao = $_POST['descricao'];
     $preco = $_POST['preco'];
     $prazo = $_POST['prazo'];
+    $categoria_id = $servico['categoria_id'];
     $disponibilidade = isset($_POST['disponibilidade']) ? 1 : 0;
     $avaliacao = $_POST['avaliacao'];
     $localizacao = $_POST['localizacao'];
 
-    $ServicoController->editar($nome_servico, $descricao, $preco, $prazo, $disponibilidade, $avaliacao, $localizacao, $id);
+    $servicoController->editar($id,
+        $nome_servico,
+        $descricao,
+        $preco,
+        $prazo,
+        $categoria_id);
 
     header('Location: ../../../index.php');
 }
