@@ -1,3 +1,49 @@
+<?php
+
+session_start();
+
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/database.php";
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+    $tipo = $_POST['tipo'];
+
+    $usuarioId = $_SESSION['usuario_temp']['id'];
+
+    $sql = "UPDATE usuarios SET tipo = ? WHERE id = ?";
+
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->execute([$tipo, $usuarioId]);
+
+    
+    $sqlUsuario = "SELECT * FROM usuarios WHERE id = ?";
+
+    $stmtUsuario = $pdo->prepare($sqlUsuario);
+
+    $stmtUsuario->execute([$usuarioId]);
+
+    $usuario = $stmtUsuario->fetch(PDO::FETCH_ASSOC);
+
+
+    
+    $_SESSION['usuario'] = [
+        'id' => $usuario['id'],
+        'nome' => $usuario['nome'],
+        'email' => $usuario['email'],
+        'tipo' => $tipo
+    ];
+
+
+    
+    unset($_SESSION['usuario_temp']);
+
+    
+    header("Location: home.php");
+
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -184,17 +230,6 @@
             1px solid rgba(255,255,255,.1);
         }
 
-        @media(max-width:768px){
-
-            .titulo h1{
-                font-size:38px;
-            }
-
-            .titulo p{
-                font-size:16px;
-            }
-
-        }
 
     </style>
 </head>
@@ -235,7 +270,7 @@
                 >
 
                     <div class="icon">
-                        <img src="../imagem/maleta.png" alt="" width="50px">
+                        <img src="../img/maleta.png" alt="" width="50px">
                     </div>
 
                     <h2>
@@ -277,7 +312,7 @@
                 >
 
                     <div class="icon">
-                        <img src="../imagem/pessoa.png" alt="" width="50px">
+                        <img src="../img/pessoa.png" alt="" width="50px">
                     </div>
 
                     <h2>

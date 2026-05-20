@@ -1,4 +1,3 @@
-
 <?php
 
 session_start();
@@ -18,14 +17,16 @@ $servicos = $servicoController->listar();
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/home.css">
     <title>Catálogo de Serviços</title>
 
-    
+
 </head>
+
 <body>
 
     <header>
@@ -34,39 +35,35 @@ $servicos = $servicoController->listar();
             Catálogo Serviços
         </div>
 
-        <nav>
+         <nav>
 
-    <?php if(isset($_SESSION['usuario'])): ?>
+            <?php if(isset($_SESSION['usuario'])): ?>
 
-        
+                <?php if($_SESSION['usuario']['tipo'] === 'prestador'): ?>
 
-        
-        <?php if($_SESSION['usuario']['tipo'] === 'prestador'): ?>
+                    <a href="Prestador/servicos/meus-servicos.php">
+                        Meus serviços
+                    </a>
 
-            <a href="Prestador/servicos/meus-servicos.php">
-                Meus serviços
-            </a>
+                <?php endif; ?>
 
-        <?php endif; ?>
+                <a href="logout.php">
+                    Sair
+                </a>
 
-        
-        <a href="logout.php">
-            Sair
-        </a>
+            <?php else: ?>
 
-    <?php else: ?>
+                <a href="login.php">
+                    Entrar
+                </a>
 
-        <a href="login.php">
-            Entrar
-        </a>
+                <a href="cadastro.php">
+                    Cadastrar
+                </a>
 
-        <a href="cadastro.php">
-            Cadastrar
-        </a>
+            <?php endif; ?>
 
-    <?php endif; ?>
-
-</nav>
+        </nav>
 
     </header>
 
@@ -77,8 +74,7 @@ $servicos = $servicoController->listar();
 
             <input
                 type="text"
-                placeholder="Buscar serviços"
-            >
+                placeholder="Buscar serviços">
 
             <select>
                 <option>Categoria</option>
@@ -132,92 +128,105 @@ $servicos = $servicoController->listar();
 
     <section class="servicos">
 
-    <h2 class="section-title">
-        Serviços em destaque
-    </h2>
+        <h2 class="section-title">
+            Serviços em destaque
+        </h2>
 
-    <div class="servicos-grid">
+        <div class="servicos-grid">
 
-        <?php foreach($servicos as $servico): ?>
+            <?php foreach ($servicos as $servico): ?>
 
-            <div class="card-servico">
+                <div class="card-servico">
 
-                <div class="top-card">
+                    <div class="top-card">
 
-                    <div class="perfil-area">
+                        <div class="perfil-area">
 
-                        <img 
-                            src="<?= !empty($servico['foto']) ? $servico['foto'] : '../img/user.jpg' ?>"
-                            alt="Prestador"
-                            class="foto-prestador"
-                        >
+                            <img
+                                src="<?= !empty($servico['foto']) ? $servico['foto'] : '../img/user.jpg' ?>"
+                                alt="Prestador"
+                                class="foto-prestador">
 
-                        <div class="perfil-info">
+                            <div class="perfil-info">
 
-                            <span class="nome-prestador">
-                                <?= $servico['prestador'] ?>
-                            </span>
+                                <span class="nome-prestador">
+                                    <?= $servico['prestador'] ?>
+                                </span>
 
-                            <h3>
-                                <?= $servico['nome_servico'] ?>
-                            </h3>
+                                <h3>
+                                    <?= $servico['nome_servico'] ?>
+                                </h3>
 
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="card-content">
-
-                    <p class="descricao">
-                        <?= $servico['descricao'] ?>
-                    </p>
-
-                    <div class="info-servico">
-
-                        <div class="info-box">
-
-                            <span class="label">
-                                Prazo
-                            </span>
-
-                            <strong>
-                                <?= $servico['prazo'] ?> dias
-                            </strong>
-
-                        </div>
-
-                        <div class="info-box">
-
-                            <span class="label">
-                                Preço
-                            </span>
-
-                            <strong class="preco">
-                                R$ <?= number_format($servico['preco'], 2, ',', '.') ?>
-                            </strong>
+                            </div>
 
                         </div>
 
                     </div>
 
-                    <a 
-                        href="servico.php?id=<?= $servico['id'] ?>"
-                        class="btn-contratar"
-                    >
-                        Contratar
-                    </a>
+                    <div class="card-content">
+
+                        <p class="descricao">
+                            <?= $servico['descricao'] ?>
+                        </p>
+
+                        <div class="info-servico">
+
+                            <div class="info-box">
+
+                                <span class="label">
+                                    Prazo
+                                </span>
+
+                                <strong>
+                                    <?= $servico['prazo'] ?> dias
+                                </strong>
+
+                            </div>
+
+                            <div class="info-box">
+
+                                <span class="label">
+                                    Preço
+                                </span>
+
+                                <strong class="preco">
+                                    R$ <?= number_format($servico['preco'], 2, ',', '.') ?>
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                        <?php if (
+                            isset($_SESSION['usuario']) &&
+                            $_SESSION['usuario']['tipo'] === 'prestador'
+                        ): ?>
+
+                            <a
+                                href="servico.php?id=<?= $servico['id'] ?>"
+                                class="btn-ver-servico">
+                                Ver serviço
+                            </a>
+
+                        <?php else: ?>
+
+                            <a
+                                href="servico.php?id=<?= $servico['id'] ?>"
+                                class="btn-contratar">
+                                Contratar
+                            </a>
+
+                        <?php endif; ?>
+
+                    </div>
 
                 </div>
 
-            </div>
+            <?php endforeach; ?>
 
-        <?php endforeach; ?>
+        </div>
 
-    </div>
-
-</section>
+    </section>
 
 
     <footer>
@@ -227,5 +236,5 @@ $servicos = $servicoController->listar();
     </footer>
 
 </body>
-</html>
 
+</html>

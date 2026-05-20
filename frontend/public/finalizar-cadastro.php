@@ -10,9 +10,7 @@ require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/U
 if(!isset($_SESSION['cadastro'])){
 
     header("Location: cadastro.php");
-
     exit;
-
 }
 
 
@@ -25,9 +23,7 @@ if(
 ){
 
     header("Location: escolher-tipo.php");
-
     exit;
-
 }
 
 
@@ -52,10 +48,24 @@ $usuarioController->cadastrar(
 
 );
 
+$stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = ?");
+$stmt->execute([$email]);
+
+$usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+$_SESSION['usuario'] = [
+
+    'id' => $usuario['id'],
+    'nome' => $usuario['nome'],
+    'email' => $usuario['email'],
+    'tipo' => $usuario['tipo']
+
+];
+
+
 
 unset($_SESSION['cadastro']);
 
-
 header("Location: home.php");
-
 exit;
