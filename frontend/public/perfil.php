@@ -1,3 +1,30 @@
+<?php
+
+session_start();
+
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/database.php";
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/UsuarioController.php";
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ServicoController.php";
+
+if (!isset($_SESSION['usuario'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$usuarioId = $_SESSION['usuario']['id'];
+
+$usuarioController = new UsuarioController($pdo);
+$servicoController = new ServicoController($pdo);
+
+$usuario = $usuarioController->buscarUsuario($usuarioId);
+$servicos = [];
+
+
+if ($usuario['tipo'] === 'prestador') {
+    $servicos = $servicoController->listarPorPrestador($usuarioId);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,41 +40,46 @@
 
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f1f5f9;
+    background: #11172a;
     color: #0f172a;
 }
 
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 20px;
+    padding: 10px 14px;
+    border-radius: 10px;
+
+    background: #f1f5f9;
+    color: #0f172a;
+
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+
+    border: 1px solid #e2e8f0;
+
+    transition: 0.25s ease;
+}
+
+.btn-back:hover {
+    background: #e2e8f0;
+    transform: translateX(-3px);
+}
+
+.icon-back {
+    width: 16px;
+    height: 16px;
+}
+
 .container {
-    max-width: 960px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding-bottom: 40px;
+    padding-top: 10rem;
 }
 
-/* BANNER */
-.banner {
-    height: 200px;
-    background: #1e3a8a;
-    position: relative;
-    overflow: hidden;
-}
-
-.banner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(120deg, #1e3a8a 0%, #2563eb 60%, #3b82f6 100%);
-}
-
-.banner::after {
-    content: '';
-    position: absolute;
-    width: 340px;
-    height: 340px;
-    border-radius: 50%;
-    border: 1.5px solid rgba(255,255,255,.08);
-    top: -90px;
-    right: 60px;
-}
 
 /* PROFILE BAR */
 .profile-bar {
@@ -149,27 +181,35 @@ body {
     padding-bottom: 4px;
 }
 
-.btn-outline {
-    padding: 8px 16px;
-    border-radius: 8px;
+.profile-actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 1rem;
+    padding: 10px 16px;
+    border-radius: 10px;
+
     font-size: 13px;
     font-weight: 600;
-    cursor: pointer;
-    border: 1.5px solid #e2e8f0;
-    background: transparent;
-    color: #0f172a;
+    text-decoration: none;
+
+    color: #fff;
+    background: #11172a;
+
+
+    transition: all 0.25s ease;
 }
 
-.btn-solid {
-    padding: 8px 18px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    background: #2563eb;
+.profile-actions a:hover {
+    background: #161e36;
     color: #fff;
+
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(22, 35, 71, 0.25);
 }
+
+
 
 /* STATS */
 .stats-row {
@@ -223,6 +263,8 @@ body {
 }
 
 .card-title {
+    display: flex;
+    justify-content: center;
     font-size: 14px;
     font-weight: 700;
     color: #0f172a;
@@ -262,7 +304,7 @@ body {
 .price {
     font-size: 15px;
     font-weight: 700;
-    color: #2563eb;
+    color: #1b274c;
     white-space: nowrap;
 }
 
@@ -271,13 +313,21 @@ body {
     align-items: center;
     gap: 6px;
     margin-top: 16px;
-    background: #2563eb;
+    background: #11172a;
     color: #fff;
     padding: 10px 18px;
     border-radius: 10px;
     text-decoration: none;
     font-size: 13px;
     font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.btn:hover{
+    background: #161e36;
+    color: #fff;
+
+    transform: translateY(-2px);
 }
 
 /* INFORMAÇÕES */
@@ -303,7 +353,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 17px;
-    color: #2563eb;
+    color: #11172a;
     flex-shrink: 0;
 }
 
@@ -327,6 +377,12 @@ body {
 
 <body>
 
+<a href="home.php" class="btn-back">
+    <svg class="icon-back" viewBox="0 0 24 24" fill="none">
+        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</a>
+
 <div class="container">
 
     <div class="banner"></div>
@@ -334,8 +390,7 @@ body {
     <div class="profile-bar">
         <div class="profile-left">
             <div class="avatar-wrap">
-                <img class="avatar" src="<?= $usuario['foto'] ?? '' ?>" alt="Foto de perfil"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <img class="avatar" src="<?= !empty($servico['foto']) ? $servico['foto'] : '../img/user.jpg' ?>">
                 <div class="avatar" style="display:none;">
                     <?= strtoupper(substr($usuario['nome'], 0, 2)) ?>
                 </div>
@@ -346,13 +401,11 @@ body {
                 <div class="meta"><?= htmlspecialchars($usuario['email']) ?></div>
                 <div class="tags">
                     <span class="badge badge-tipo"><?= htmlspecialchars($usuario['tipo']) ?></span>
-                    <span class="badge badge-rating">★ 4.8</span>
                 </div>
             </div>
         </div>
         <div class="profile-actions">
-            <button class="btn-outline">Editar perfil</button>
-            <button class="btn-solid">Compartilhar</button>
+            <a href="logout.php">Sair</a>
         </div>
     </div>
 
@@ -377,7 +430,7 @@ body {
     <div class="grid">
 
         <div class="card">
-            <div class="card-title">Serviços</div>
+            <div class="card-title"><h2>Seus Serviços</h2></div>
 
             <?php foreach ($servicos as $s): ?>
             <div class="service">
@@ -397,7 +450,7 @@ body {
         </div>
 
         <div class="card">
-            <div class="card-title">Informações</div>
+            <div class="card-title"><h2>Informações</h2></div>
 
             <div class="info-row">
                 <div class="info-icon">✉</div>
