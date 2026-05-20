@@ -38,60 +38,39 @@ $servicos = $servicoController->listar();
 
         <nav>
 
-            <?php if (isset($_SESSION['usuario'])): ?>
-
-                <?php if ($_SESSION['usuario']['tipo'] === 'prestador'): ?>
-
-                    <a href="Prestador/servicos/meus-servicos.php">
-                        Meus serviços
-                    </a>
-
-                <?php endif; ?>
-
-                <a href="logout.php">
-                    Sair
-                </a>
-
-            <?php else: ?>
-
-                <a href="login.php">
-                    Entrar
-                </a>
-
-                <a href="cadastro.php">
-                    Cadastrar
-                </a>
-
-            <?php endif; ?>
-
-        </nav>
-
-    </header>
-
-
-    <section class="search-area">
-
-        <form class="search-box">
+         <form class="search-box">
 
             <input
                 type="text"
                 placeholder="Buscar serviços">
 
-            <select>
-                <option>Categoria</option>
-                <option>Design</option>
-                <option>Marketing</option>
-                <option>Desenvolvimento</option>
-                <option>Consultoria</option>
-            </select>
-
             <button>
-                Buscar
+                <i class="fa-solid fa-magnifying-glass" style="color: #111827;"></i>
             </button>
-
+    
         </form>
 
-    </section>
+            <?php if (!empty($_SESSION['usuario'])): ?>
+
+    <?php if (($_SESSION['usuario']['tipo'] ?? '') === 'prestador'): ?>
+
+    <?php endif; ?>
+
+    <a href="perfil.php" class="icon-user">
+        <i class="fa-solid fa-user"></i>
+    </a>
+
+<?php else: ?>
+
+    <a href="login.php">Entrar</a>
+    <a href="cadastro.php">Cadastrar</a>
+
+<?php endif; ?>
+
+
+        </nav>
+
+    </header>
 
 
     <section class="categorias">
@@ -126,6 +105,7 @@ $servicos = $servicoController->listar();
 
     </section>
 
+    <hr style="color: #111827; max-width: 84%; margin-left: 9.5rem    ;">
 
     <section class="servicos">
 
@@ -167,8 +147,8 @@ $servicos = $servicoController->listar();
                     <div class="card-content">
 
                         <p class="descricao">
-    <?= mb_strimwidth($servico['descricao'], 0, 120, '...') ?>
-</p>
+                            <?= mb_strimwidth($servico['descricao'], 0, 120, '...') ?>
+                        </p>
 
                         <p class="localizacao">
                             <i class="fa-solid fa-location-dot"></i>
@@ -217,7 +197,7 @@ $servicos = $servicoController->listar();
         '<?= $servico['prazo'] ?>',
         '<?= $servico['preco'] ?>',
         '<?= $servico['localizacao'] ?>',
-        '<?= !empty($servico['foto']) ? $servico['foto'] : 'img/user.png' ?>'
+        '<?= !empty($servico['foto']) ? $servico['foto'] : '../img/user.jpg' ?>'
     )">
                                 Ver serviço
                             </button>
@@ -252,64 +232,64 @@ $servicos = $servicoController->listar();
 
     <div class="modal-servico" id="modalServico">
 
-    <div class="modal-box">
+        <div class="modal-box">
 
-        <span
-            class="fechar-modal"
-            onclick="fecharModalServico()"
-        >
-            &times;
-        </span>
+            <span
+                class="fechar-modal"
+                onclick="fecharModalServico()">
+                &times;
+            </span>
 
-        <div class="modal-topo">
+            <div class="modal-topo">
 
-            <img
-                src=""
-                id="modal-foto"
-                class="modal-foto"
-            >
+                <img
+                    src=""
+                    id="modal-foto"
+                    class="modal-foto">
 
-            <div>
+                <div>
 
-                <span class="modal-prestador" id="modal-prestador"></span>
+                    <span class="modal-prestador" id="modal-prestador"></span>
 
-                <h2 id="modal-titulo"></h2>
-
-            </div>
-
-        </div>
-
-        <div class="modal-info">
-
-            <p id="modal-descricao"></p>
-
-            <div class="modal-detalhes">
-
-                <div class="detalhe-box">
-
-                    <span>
-                        Prazo
-                    </span>
-
-                    <strong id="modal-prazo"></strong>
-
-                </div>
-
-                <div class="detalhe-box">
-
-                    <span>
-                        Preço
-                    </span>
-
-                    <strong id="modal-preco"></strong>
+                    <h2 id="modal-titulo"></h2>
 
                 </div>
 
             </div>
 
-            <div class="modal-localizacao">
+            <div class="modal-info">
 
-                📍 <span id="modal-localizacao"></span>
+                <p id="modal-descricao"></p>
+
+                <div class="modal-detalhes">
+
+                    <div class="detalhe-box">
+
+                        <span>
+                            Prazo
+                        </span>
+
+                        <strong id="modal-prazo"></strong>
+
+                    </div>
+
+                    <div class="detalhe-box">
+
+                        <span>
+                            Preço
+                        </span>
+
+                        <strong id="modal-preco"></strong>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-localizacao">
+
+                    📍 <span id="modal-localizacao"></span>
+
+                </div>
 
             </div>
 
@@ -317,45 +297,41 @@ $servicos = $servicoController->listar();
 
     </div>
 
-</div>
-
 </body>
 
 </html>
 <script>
+    function abrirModalServico(
+        nome,
+        prestador,
+        descricao,
+        prazo,
+        preco,
+        localizacao,
+        foto
+    ) {
 
-function abrirModalServico(
-    nome,
-    prestador,
-    descricao,
-    prazo,
-    preco,
-    localizacao,
-    foto
-){
+        document.getElementById('modal-titulo').innerText = nome;
 
-    document.getElementById('modal-titulo').innerText = nome;
+        document.getElementById('modal-prestador').innerText = prestador;
 
-    document.getElementById('modal-prestador').innerText = prestador;
+        document.getElementById('modal-descricao').innerText = descricao;
 
-    document.getElementById('modal-descricao').innerText = descricao;
+        document.getElementById('modal-prazo').innerText = prazo + ' dias';
 
-    document.getElementById('modal-prazo').innerText = prazo + ' dias';
+        document.getElementById('modal-preco').innerText =
+            'R$ ' + parseFloat(preco).toFixed(2);
 
-    document.getElementById('modal-preco').innerText =
-        'R$ ' + parseFloat(preco).toFixed(2);
+        document.getElementById('modal-localizacao').innerText =
+            localizacao;
 
-    document.getElementById('modal-localizacao').innerText =
-        localizacao;
+        document.getElementById('modal-foto').src = foto;
 
-    document.getElementById('modal-foto').src = foto;
+        document.getElementById('modalServico').style.display = 'flex';
+    }
 
-    document.getElementById('modalServico').style.display = 'flex';
-}
+    function fecharModalServico() {
 
-function fecharModalServico(){
-
-    document.getElementById('modalServico').style.display = 'none';
-}
-
+        document.getElementById('modalServico').style.display = 'none';
+    }
 </script>
