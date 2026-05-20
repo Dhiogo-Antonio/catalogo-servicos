@@ -72,36 +72,6 @@ $servicos = $servicoController->listar();
     </header>
 
 
-    <section class="hero">
-
-        <div class="hero-text">
-
-            <h1>
-                Encontre profissionais para qualquer serviço
-            </h1>
-
-            <p>
-                Contrate designers, desenvolvedores, especialistas em marketing,
-                consultores e muito mais.
-            </p>
-
-            <div class="hero-buttons">
-
-                <a href="servicos/servicos.php" class="btn-primary">
-                    Explorar serviços
-                </a>
-
-                <a href="cadastro.php" class="btn-secondary">
-                    Tornar-se prestador
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
     <section class="search-area">
 
         <form class="search-box">
