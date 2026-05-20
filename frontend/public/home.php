@@ -18,7 +18,7 @@ $servicos = $servicoController->listar();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
     <title>Catálogo de Serviços</title>
 
     
@@ -32,11 +32,42 @@ $servicos = $servicoController->listar();
         </div>
 
         <nav>
-            <a href="cadastro.php">Cadastrar</a>
-            <a href="login.php" class="btn-login">
-                Entrar
+
+    <?php if(isset($_SESSION['usuario'])): ?>
+
+        
+
+        
+        <?php if($_SESSION['usuario']['tipo'] === 'prestador'): ?>
+
+            <a href="Prestador/servicos/meus-servicos.php">
+                Meus serviços
             </a>
-        </nav>
+
+            <a href="servicos/criar.php">
+                Criar serviço
+            </a>
+
+        <?php endif; ?>
+
+        
+        <a href="logout.php">
+            Sair
+        </a>
+
+    <?php else: ?>
+
+        <a href="login.php">
+            Entrar
+        </a>
+
+        <a href="cadastro.php">
+            Cadastrar
+        </a>
+
+    <?php endif; ?>
+
+</nav>
 
     </header>
 

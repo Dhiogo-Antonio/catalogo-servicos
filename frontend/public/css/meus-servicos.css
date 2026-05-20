@@ -1,0 +1,264 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f6f7fb;
+    color: #1f2933;
+}
+
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: #ffffff;
+    border-bottom: 1px solid #dde3ee;
+    padding: 14px 0;
+}
+
+header .logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: #172033;
+    padding-left: 20px;
+}
+
+
+nav {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 20px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    color: #2557a7;
+    background: #eef3fb;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+nav a:hover {
+    background: #2557a7;
+    color: #fff;
+}
+
+
+.hero {
+    width: min(1100px, calc(100% - 32px));
+    margin: 40px auto;
+}
+
+.hero-text h1 {
+    font-size: 42px;
+    line-height: 1.1;
+    margin-bottom: 12px;
+}
+
+.hero-text p {
+    color: #52616f;
+    max-width: 700px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.hero-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    background: #2557a7;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.btn-primary:hover {
+    background: #1d478a;
+}
+
+.btn-secondary {
+    background: #eef3fb;
+    color: #2557a7;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.btn-secondary:hover {
+    background: #dce8fb;
+}
+
+
+.search-area {
+    width: min(1100px, calc(100% - 32px));
+    margin: 30px auto;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.search-box input,
+.search-box select {
+    padding: 10px;
+    border: 1px solid #c8d2df;
+    border-radius: 8px;
+    outline: none;
+    flex: 1;
+    min-width: 180px;
+}
+
+.search-box button {
+    background: #2557a7;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.search-box button:hover {
+    background: #1d478a;
+}
+
+
+.categorias {
+    width: min(1100px, calc(100% - 32px));
+    margin: 40px auto;
+}
+
+.section-title {
+    font-size: 22px;
+    margin-bottom: 16px;
+}
+
+.categorias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+}
+
+.categoria-card {
+    background: #fff;
+    border: 1px solid #dde3ee;
+    padding: 18px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 700;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.categoria-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+
+.servicos {
+    width: min(1100px, calc(100% - 32px));
+    margin: 40px auto;
+}
+
+.servicos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+.card-servico {
+    background: #fff;
+    border: 1px solid #dde3ee;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.2s;
+}
+
+.card-servico:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.card-img {
+    height: 140px;
+    background: linear-gradient(135deg, #2557a7, #6ea8ff);
+}
+
+.card-content {
+    padding: 16px;
+}
+
+.card-content h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.descricao {
+    font-size: 14px;
+    color: #52616f;
+    margin-bottom: 10px;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #66788a;
+    margin-bottom: 10px;
+}
+
+.preco {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #172033;
+}
+
+.prestador {
+    font-size: 13px;
+    color: #52616f;
+    margin-bottom: 12px;
+}
+
+.btn-servico {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background: #2557a7;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.btn-servico:hover {
+    background: #1d478a;
+}
+
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #66788a;
+    margin-top: 40px;
+    border-top: 1px solid #dde3ee;
+}

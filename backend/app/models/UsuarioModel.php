@@ -15,20 +15,19 @@ class UsuarioModel {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function cadastrar($nome, $email, $senha, $telefone, $tipo, $criado_em) {
-        $sql = "INSERT INTO usuarios (nome, email, senha, telefone, tipo, criado_em) VALUES (:nome, :email, :senha, :telefone, :tipo, :criado_em)";
+    public function cadastrar($nome, $email, $senha, $telefone, $tipo) {
+        $sql = "INSERT INTO usuarios (nome, email, senha, telefone, tipo) VALUES (:nome, :email, :senha, :telefone, :tipo)";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
             ':nome' => $nome,
             ':email' => $email,
             ':senha' => $senha,
             ':telefone' => $telefone,
-            ':tipo' => $tipo,
-            ':criado_em' => $criado_em
+            ':tipo' => $tipo
         ]);
     }
-    public function editar($nome, $email, $senha, $telefone, $tipo, $criado_em, $id) {
-        $sql = "UPDATE usuarios SET nome=?, email=?, senha=?, telefone=?, tipo=?, criado_em=? WHERE id = ?";
+    public function editar($nome, $email, $senha, $telefone, $id) {
+        $sql = "UPDATE usuarios SET nome=?, email=?, senha=?, telefone=? WHERE id = ?";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([$nome, $email, $senha, $telefone, $id]);
     }
@@ -38,5 +37,20 @@ class UsuarioModel {
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([$id]);
     }
+
+    public function buscarPorEmail($email){
+
+    $sql = "SELECT * FROM usuarios
+    WHERE email = ?";
+
+    $stmt = $this->pdo->prepare($sql);
+
+    $stmt->execute([$email]);
+
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $usuario;
+
+}
     
 }

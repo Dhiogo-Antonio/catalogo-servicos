@@ -1,105 +1,156 @@
 <?php
+
 session_start();
 
-       require_once __DIR__ . '/../../backend/app/database/database.php';
 
-       $erro = '';
-       $sucesso = '';   
-       $nome = '';
-       $email = '';
-       $telefone = '';
-       $tipo = 'cliente';
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $nome = trim($_POST['nome'] ?? '');
-        $email = trim($_POST['email'] ?? '');
-        $senha = $_POST['senha'] ?? '';
-        $telefone = trim($_POST['telefone'] ?? '');
-        $tipo = $_POST['tipo'] ?? 'cliente';
-        $tiposPermitidos = ['cliente', 'prestador'];
+    $_SESSION['cadastro'] = [
 
-        if ($nome === '' || $email === '' || $senha === '' || $telefone === '') {
-        $erro = 'Preencha todos os campos obrigatorios.';
-}       elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $erro = 'Informe um e-mail valido.';
-}       elseif (!in_array($tipo, $tiposPermitidos, true)) {
-        $erro = 'Tipo de usuario invalido.';
-}       else {
-        try {
-        $stmt = $pdo->prepare(
-        'INSERT INTO usuarios (nome, email, senha, telefone, tipo) VALUES (:nome, :email, :senha, :telefone, :tipo)'
-);
+        'nome' => $_POST['nome'],
+        'email' => $_POST['email'],
+        'telefone' => $_POST['telefone'],
+        'senha' => $_POST['senha']
 
-        $stmt->execute([
-        ':nome' => $nome,
-        ':email' => $email,
-        ':senha' => password_hash($senha, PASSWORD_DEFAULT),
-        ':telefone' => $telefone,
-        ':tipo' => $tipo,
-]);
+    ];
 
-        $sucesso = 'Cadastro realizado com sucesso. Agora voce ja pode entrar.';
-        $nome = '';
-        $email = '';
-        $telefone = '';
-        $tipo = 'cliente';
-}       catch (PDOException $e) {
-        if ($e->getCode() === '23000') {
-        $erro = 'Este e-mail ja esta cadastrado.';
-}       else {
-        $erro = 'Nao foi possivel concluir o cadastro.';
+    header('Location: escolher-tipo.php');
+
+    exit;
 }
-}
-}
-}
+
 ?>
-        <!DOCTYPE html>
-        <html lang="pt-br">
-        <head> 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cadastro | Catalogo de Servicos</title>
-        <link rel="stylesheet" href="css/cadastro-login.css">
-        </head>
-        <body class="auth-page">
-        <main class="auth-shell">
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Cadastro
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/cadastro-login.css"
+    >
+
+</head>
+
+<body class="auth-page">
+
+    <main class="auth-shell">
+
         <section class="auth-panel">
-        <a class="brand-link" href="index.php">Catalogo de Servicos</a>
-        <h1>Criar conta</h1>
-        <p class="muted">Cadastre-se para contratar ou divulgar servicos.</p>
 
-        <?php if ($erro): ?>
-        <p class="alert error"><?= htmlspecialchars($erro) ?></p>
-        <?php endif; ?>
+            <a
+                href="index.php"
+                class="brand-link"
+            >
+                Catálogo de Serviços
+            </a>
 
-        <?php if ($sucesso): ?>
-        <p class="alert success"><?= htmlspecialchars($sucesso) ?></p>
-        <?php endif; ?>
+            <h1>
+                Criar conta
+            </h1>
 
-        <form method="post" class="form-card">
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" value="<?= htmlspecialchars($nome) ?>" required>
+            <p class="muted">
+                Cadastre-se para contratar serviços
+                ou divulgar seu trabalho na plataforma.
+            </p>
 
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" value="<?= htmlspecialchars($email) ?>" required>
+            <form
+                method="POST"
+                class="form-card"
+            >
 
-        <label for="senha">Senha</label>
-        <input type="password" id="senha" name="senha" required>
+                <label for="nome">
+                    Nome
+                </label>
 
-        <label for="telefone">Telefone</label>
-        <input type="text" id="telefone" name="telefone" value="<?= htmlspecialchars($telefone) ?>" required>
+                <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    placeholder="Digite seu nome"
+                    required
+                >
 
-        <label for="tipo">Tipo de conta</label>
-        <select id="tipo" name="tipo">
-        <option value="cliente" <?= $tipo === 'cliente' ? 'selected' : '' ?>>Cliente</option>
-        <option value="prestador" <?= $tipo === 'prestador' ? 'selected' : '' ?>>Prestador</option>
-        </select>
 
-        <button type="submit">Cadastrar</button>
-        </form>
 
-        <p class="auth-footer">Ja tem conta? <a href="login.php">Entrar</a></p>
+                <label for="email">
+                    E-mail
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Digite seu e-mail"
+                    required
+                >
+
+
+
+                <label for="telefone">
+                    Telefone
+                </label>
+
+                <input
+                    type="text"
+                    id="telefone"
+                    name="telefone"
+                    placeholder="(00) 00000-0000"
+                    required
+                >
+
+
+
+                <label for="senha">
+                    Senha
+                </label>
+
+                <input
+                    type="password"
+                    id="senha"
+                    name="senha"
+                    placeholder="Crie uma senha"
+                    required
+                >
+
+
+
+                <button type="submit">
+
+                    Continuar
+
+                </button>
+
+            </form>
+
+
+
+            <p class="auth-footer">
+
+                Já possui conta?
+
+                <a href="login.php">
+
+                    Entrar
+
+                </a>
+
+            </p>
+
         </section>
+
     </main>
+
 </body>
 </html>

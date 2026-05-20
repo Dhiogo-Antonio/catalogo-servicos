@@ -22,8 +22,8 @@ class UsuarioController {
         $this->usuarioModel->cadastrar($nome, $email, $senha, $telefone, $tipo);
     }
     
-    public function editar($nome,$email, $senha, $telefone, $tipo, $id){
-        $this->usuarioModel->editar($nome, $email, $senha, $telefone, $tipo, $id);
+    public function editar($nome,$email, $senha, $telefone, $id){
+        $this->usuarioModel->editar($nome, $email, $senha, $telefone, $id);
 
     }
 
@@ -31,6 +31,24 @@ class UsuarioController {
         $usuario = $this->usuarioModel->deletar($id);
         return $usuario;
     }
+
+    public function login($email, $senha){
+
+    $usuario = $this->usuarioModel->buscarPorEmail($email);
+
+    if($usuario){
+
+        if($senha == $usuario['senha']){
+
+            return $usuario;
+
+        }
+
+    }
+
+    return false;
+
+}
 
 }
 

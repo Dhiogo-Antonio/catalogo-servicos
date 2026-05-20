@@ -351,11 +351,11 @@
 
         <div class="auth">
 
-            <a href="" class="btn-login">
+            <a href="login.php" class="btn-login">
                 Entrar
             </a>
 
-            <a href="" class="btn-register">
+            <a href="cadastro.php" class="btn-register">
                 Cadastrar
             </a>
 
