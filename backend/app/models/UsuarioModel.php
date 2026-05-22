@@ -15,6 +15,8 @@ class UsuarioModel {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    
+
     public function cadastrar($nome, $email, $senha, $telefone, $tipo) {
         $sql = "INSERT INTO usuarios (nome, email, senha, telefone, tipo) VALUES (:nome, :email, :senha, :telefone, :tipo)";
         $stmt = $this->pdo->prepare($sql);

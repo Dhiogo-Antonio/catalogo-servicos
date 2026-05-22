@@ -6,6 +6,9 @@ require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/data
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/UsuarioController.php";
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ServicoController.php";
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/services/PerfilService.php";
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ContratacaoController.php";
+
+$contratacaoController = new ContratacaoController($pdo);
 
 if (!isset($_SESSION['usuario'])) {
 
@@ -21,7 +24,12 @@ $perfilService = new PerfilService($usuarioController);
 
 $usuario = $usuarioController->buscarUsuario($usuarioId);
 
-$servicos = [];
+$servicos = $usuarioController->listarServicosDoPerfil(
+    $usuarioId,
+    $usuario['tipo'],
+    $servicoController,
+    $contratacaoController
+);
 
 $mensagem = "";
 
@@ -391,81 +399,71 @@ if (isset($_POST['alterar_foto'])) {
 
     <!-- LADO DIREITO -->
 
-    <div class="card">
+   <div class="card card-services">
 
+    <div class="card-title">
+        <h2>Seus Serviços</h2>
+    </div>
 
-        <!-- SERVIÇOS -->
+    <?php $limite = 5; $i = 0; ?>
 
-        <div class="card-title">
+    <?php if (!empty($servicos)): ?>
 
-            <h2>Seus Serviços</h2>
+        <?php foreach ($servicos as $s): ?>
 
-        </div>
+            <?php if ($i++ >= $limite) break; ?>
 
+            <div class="service">
 
-        <?php if (!empty($servicos)): ?>
+                <div class="service-info">
 
-            <?php foreach ($servicos as $s): ?>
+                    <h4>
+                        <?= htmlspecialchars($s['nome_servico'] ?? 'Serviço') ?>
+                    </h4>
 
-                <div class="service">
-
-                    <div>
-
-                        <h4>
-
-                            <?= htmlspecialchars($s['nome_servico']) ?>
-
-                        </h4>
-
-                        <p>
-
-                            <?= mb_strimwidth(
-                                htmlspecialchars($s['descricao']),
-                                0,
-                                100,
-                                '...'
-                            ) ?>
-
-                        </p>
-
-                    </div>
-
-
-                    <div class="price">
-
-                        R$ <?= number_format(
-                                $s['preco'],
-                                2,
-                                ',',
-                                '.'
-                            ) ?>
-
-                    </div>
+                    <p>
+                        <?= htmlspecialchars($s['solicitacao'] ?? $s['descricao'] ?? 'Sem descrição') ?>
+                    </p>
 
                 </div>
 
-            <?php endforeach; ?>
+                <div class="price">
+                    R$ <?= number_format($s['preco'] ?? 0, 2, ',', '.') ?>
+                </div>
 
-        <?php else: ?>
+                
 
-            <p>
+            </div>
 
-                Você ainda não possui serviços cadastrados.
+            
 
-            </p>
+        <?php endforeach; ?>
 
+         <a
+                class="btn"
+                href="<?= !$usuario['tipo'] === 'prestador' ? header('Location: Prestador/servicos/meus-servicos.php') : 'Cliente/servicos-contratados.php' ?>">
+
+                Ver mais
+            </a>
+
+        <?php if (count($servicos) > $limite): ?>
+            <a
+                class="btn"
+                href="<?= !$usuario['tipo'] === 'prestador' ? header('Location: Prestador/servicos/meus-servicos.php') : 'Cliente/servicos-contratados.php' ?>">
+
+                Ver Mais
+            </a>
         <?php endif; ?>
 
+    <?php else: ?>
 
-        <a
-            class="btn"
-            href="Prestador/servicos/meus-servicos.php">
+        <p>
+            Nenhum serviço encontrado.
+        </p>
 
-            Ver todos os serviços →
+    <?php endif; ?>
 
-        </a>
-
-    </div>
+</div>
 
 </div>
 

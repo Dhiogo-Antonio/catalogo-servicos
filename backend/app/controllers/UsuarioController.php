@@ -13,6 +13,16 @@ class UsuarioController {
         return;
     }
 
+    public function listarServicosDoPerfil($usuarioId, $tipo, $servicoController, $contratacaoController)
+{
+    if ($tipo === 'prestador') {
+        return $servicoController->listarPorPrestador($usuarioId);
+    }
+
+    // cliente
+    return $contratacaoController->listarPorCliente($usuarioId);
+}
+
     public function buscarUsuario($id){
         $usuario = $this->usuarioModel->buscarUsuario($id);
         return $usuario;

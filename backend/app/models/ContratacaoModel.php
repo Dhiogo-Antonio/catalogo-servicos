@@ -25,26 +25,26 @@ class ContratacaoModel {
         ]);
     }
 
-    public function listarPorCliente($clienteId) {
+   public function listarPorCliente($clienteId) {
 
-        $sql = "SELECT
-                    c.*,
-                    s.nome_servico,
-                    s.preco,
-                    u.nome AS prestador
-                FROM contratacoes c
-                INNER JOIN servicos s
-                    ON s.id = c.servico_id
-                INNER JOIN usuarios u
-                    ON u.id = s.usuario_id
-                WHERE c.cliente_id = ?
-                ORDER BY c.id DESC";
+    $sql = "SELECT
+                c.*,
+                c.mensagem AS solicitacao,
+                s.nome_servico,
+                s.preco,
+                u.nome AS prestador
+            FROM contratacoes c
+            INNER JOIN servicos s
+                ON s.id = c.servico_id
+            INNER JOIN usuarios u
+                ON u.id = s.usuario_id
+            WHERE c.cliente_id = ?
+            ORDER BY c.id DESC";
 
-        $stmt = $this->pdo->prepare($sql);
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([$clienteId]);
 
-        $stmt->execute([$clienteId]);
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 }
 ?>
