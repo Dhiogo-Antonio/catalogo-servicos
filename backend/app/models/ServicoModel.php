@@ -61,23 +61,24 @@ class ServicoModel {
     }
 
  
-    public function buscarPorId($id){
+   public function buscarPorId($id) {
 
-        $sql = "SELECT 
-                    s.*,
-                    u.nome AS prestador,
-                    c.nome AS categoria
-                FROM servicos s
-                INNER JOIN usuarios u ON u.id = s.usuario_id
-                INNER JOIN categorias c ON c.id = s.categoria_id
-                WHERE s.id = ?";
+    $sql = "SELECT
+    servicos.*,
+    usuarios.nome AS prestador,
+    usuarios.foto,
+    usuarios.email
+FROM servicos
+INNER JOIN usuarios
+ON servicos.usuario_id = usuarios.id
+WHERE servicos.id = ?";
 
-        $stmt = $this->pdo->prepare($sql);
+    $stmt = $this->pdo->prepare($sql);
 
-        $stmt->execute([$id]);
+    $stmt->execute([$id]);
 
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 
     
     public function criar(
@@ -154,5 +155,7 @@ class ServicoModel {
 
         return $stmt->execute([$id]);
     }
+
+    
 
 }

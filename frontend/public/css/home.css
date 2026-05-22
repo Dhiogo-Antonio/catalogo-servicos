@@ -412,7 +412,7 @@ nav a{
     align-items: center;
     justify-content: center;
     padding: 16px;
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    background: linear-gradient(135deg, #111827, #1d4ed8);
     color: #fff;
     text-decoration: none;
     border-radius: 14px;
@@ -568,4 +568,9 @@ footer {
     border-radius:14px;
 
     font-weight:500;
+}
+
+.botoes{
+    display:flex;
+    gap:15px;
 }

@@ -50,5 +50,21 @@ class UsuarioController {
 
 }
 
+public function alterarFoto($foto, $id){
+
+    return $this->usuarioModel->alterarFoto(
+        $foto,
+        $id
+    );
+}
+
+public function alterarSenha($senha, $id){
+
+    return $this->usuarioModel->alterarSenha(
+        $senha,
+        $id
+    );
+}
+
 }
 

@@ -52,5 +52,37 @@ class UsuarioModel {
     return $usuario;
 
 }
+
+public function alterarFoto($foto, $id){
+
+    $sql = "
+        UPDATE usuarios
+        SET foto = ?
+        WHERE id = ?
+    ";
+
+    $stmt = $this->pdo->prepare($sql);
+
+    return $stmt->execute([
+        $foto,
+        $id
+    ]);
+}
+
+public function alterarSenha($senha, $id){
+
+    $sql = "
+        UPDATE usuarios
+        SET senha = ?
+        WHERE id = ?
+    ";
+
+    $stmt = $this->pdo->prepare($sql);
+
+    return $stmt->execute([
+        $senha,
+        $id
+    ]);
+}
     
 }

@@ -204,13 +204,31 @@ $servicos = $servicoController->listar();
 
                         <?php else: ?>
 
+                            <div class="botoes">
+
+                            <button
+                                class="btn-ver-servico"
+                                onclick="abrirModalServico(
+        '<?= $servico['nome_servico'] ?>',
+        '<?= $servico['prestador'] ?>',
+        '<?= $servico['descricao'] ?>',
+        '<?= $servico['prazo'] ?>',
+        '<?= $servico['preco'] ?>',
+        '<?= $servico['localizacao'] ?>',
+        '<?= !empty($servico['foto']) ? $servico['foto'] : '../img/user.jpg' ?>'
+    )">
+                                Ver serviço
+                            </button>
+
                             <a
-                                href="servico.php?id=<?= $servico['id'] ?>"
+                                href="Cliente/contratar-servico.php?id=<?= $servico['id'] ?>"
                                 class="btn-contratar">
                                 Contratar
                             </a>
 
                         <?php endif; ?>
+
+                        </div>
 
                     </div>
 

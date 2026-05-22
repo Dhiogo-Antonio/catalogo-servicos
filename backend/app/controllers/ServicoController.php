@@ -75,4 +75,6 @@ class ServicoController
     {
         return $this->servicoModel->deletar($id);
     }
+
+    
 }
