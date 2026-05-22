@@ -41,6 +41,36 @@ class ServicoModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function buscarFiltrados($q = null, $categoriaId = null)
+{
+    $sql = "SELECT 
+                s.*,
+                u.nome AS prestador,
+                u.foto,
+                c.nome AS categoria_nome
+            FROM servicos s
+            JOIN usuarios u ON u.id = s.usuario_id
+            JOIN categorias c ON c.id = s.categoria_id
+            WHERE 1=1";
+    $params = [];
+
+    if (!empty($q)) {
+        $sql .= " AND (s.nome_servico LIKE ? OR s.descricao LIKE ?)";
+        $params[] = "%$q%";
+        $params[] = "%$q%";
+    }
+
+    if (!empty($categoriaId)) {
+        $sql .= " AND s.categoria_id = ?";
+        $params[] = $categoriaId;
+    }
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute($params);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
     
     public function listarPorCategoria($categoriaId){
 

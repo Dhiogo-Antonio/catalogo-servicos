@@ -440,19 +440,23 @@ if (isset($_POST['alterar_foto'])) {
         <?php endforeach; ?>
 
          <a
-                class="btn"
-                href="<?= !$usuario['tipo'] === 'prestador' ? header('Location: Prestador/servicos/meus-servicos.php') : 'Cliente/servicos-contratados.php' ?>">
+    class="btn"
+    href="<?= $usuario['tipo'] === 'prestador'
+        ? 'Prestador/servicos/meus-servicos.php'
+        : 'Cliente/servicos-contratados.php' ?>">
 
-                Ver mais
-            </a>
+    Ver Mais
+</a>
 
         <?php if (count($servicos) > $limite): ?>
             <a
-                class="btn"
-                href="<?= !$usuario['tipo'] === 'prestador' ? header('Location: Prestador/servicos/meus-servicos.php') : 'Cliente/servicos-contratados.php' ?>">
+    class="btn"
+    href="<?= $usuario['tipo'] === 'prestador'
+        ? 'Prestador/servicos/meus-servicos.php'
+        : 'Cliente/servicos-contratados.php' ?>">
 
-                Ver Mais
-            </a>
+    Ver Mais
+</a>
         <?php endif; ?>
 
     <?php else: ?>

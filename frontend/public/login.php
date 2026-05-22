@@ -83,19 +83,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         <section class="auth-panel">
 
-            <a
-                href="index.php"
-                class="brand-link"
-            >
-
-                Catálogo de Serviços
-
-            </a>
-
-
-
             <h1>
-                Entrar
+                Login
             </h1>
 
             <p class="muted">

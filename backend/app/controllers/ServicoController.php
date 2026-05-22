@@ -30,6 +30,17 @@ class ServicoController
         return $this->servicoModel->buscarPorId($id);
     }
 
+    public function buscarFiltrados($q, $categoriaId)
+    {
+        return $this->servicoModel->buscarFiltrados($q, $categoriaId);
+    }
+
+     // LISTAR POR CATEGORIA
+     public function listarPorCategoria($categoriaId)
+     {
+         return $this->servicoModel->listarPorCategoria($categoriaId);
+     }
+
     // CRIAR SERVIÇO
     public function criar(
         $usuarioId,

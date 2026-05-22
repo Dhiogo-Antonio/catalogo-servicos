@@ -4,14 +4,20 @@ session_start();
 
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/database.php";
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ServicoController.php";
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/CategoriaController.php";
+
+$categoriaController = new CategoriaController($pdo);
+$categorias = $categoriaController->listar();
 
 
 
 $servicoController = new ServicoController($pdo);
 
 
-$servicos = $servicoController->listar();
+$q = $_GET['q'] ?? null;
+$categoriaId = $_GET['categoria'] ?? null;
 
+$servicos = $servicoController->buscarFiltrados($q, $categoriaId);
 
 ?>
 
@@ -33,85 +39,135 @@ $servicos = $servicoController->listar();
     <header>
 
         <div class="logo">
-            Catálogo Serviços
-        </div>
+    <div class="logo-icon">
+        <i class="fa-solid fa-screwdriver-wrench"></i>
+    </div>
+<div class="logo-text">
+        <span class="logo-name">ProServiços</span>
+    </div>
+</div>
 
         <nav>
 
-         <form class="search-box">
+            <form class="search-box" method="GET" action="home.php">
+                <input
+                    type="text"
+                    name="q"
+                    placeholder="Buscar serviços"
+                    value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
 
-            <input
-                type="text"
-                placeholder="Buscar serviços">
-
-            <button>
-                <i class="fa-solid fa-magnifying-glass" style="color: #111827;"></i>
-            </button>
-    
-        </form>
+                <button type="submit">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #111827;"></i>
+                </button>
+            </form>
 
             <?php if (!empty($_SESSION['usuario'])): ?>
 
-    <?php if (($_SESSION['usuario']['tipo'] ?? '') === 'prestador'): ?>
+                <?php if (($_SESSION['usuario']['tipo'] ?? '') === 'prestador'): ?>
 
-    <?php endif; ?>
+                <?php endif; ?>
 
-    <a href="perfil.php" class="icon-user">
-        <i class="fa-solid fa-user"></i>
-    </a>
+                <a href="perfil.php" class="icon-user">
+                    <i class="fa-solid fa-user"></i>
+                </a>
 
-<?php else: ?>
+            <?php else: ?>
 
-    <a href="login.php">Entrar</a>
-    <a href="cadastro.php">Cadastrar</a>
+                <a href="login.php">Entrar</a>
+                <a href="cadastro.php">Cadastrar</a>
 
-<?php endif; ?>
+            <?php endif; ?>
 
 
         </nav>
 
     </header>
 
+    <section class="welcome-section">
 
-    <section class="categorias">
+        <div class="welcome-text">
 
-        <h2 class="section-title">
-            Categorias
-        </h2>
+            <h1>
+                Bem-vindo, <?= htmlspecialchars($_SESSION['usuario']['nome'] ?? 'Visitante') ?>
+            </h1>
 
-        <div class="categorias-grid">
+            <p>
+                <?php if (!empty($_SESSION['usuario']) && $_SESSION['usuario']['tipo'] === 'prestador'): ?>
+                    Gerencie seus serviços e aumente suas oportunidades de clientes.
+                <?php else: ?>
+                    Encontre profissionais qualificados e contrate seu primeiro serviço.
+                <?php endif; ?>
+            </p>
 
-            <div class="categoria-card">
-                <h3>Design</h3>
-            </div>
+        </div>
 
-            <div class="categoria-card">
-                <h3>Marketing</h3>
-            </div>
+        <div class="recommendation-card">
 
-            <div class="categoria-card">
-                <h3>Desenvolvimento</h3>
-            </div>
+            <?php if (!empty($_SESSION['usuario']) && $_SESSION['usuario']['tipo'] === 'prestador'): ?>
 
-            <div class="categoria-card">
-                <h3>Consultoria</h3>
-            </div>
+                <h3>Crie seu primeiro serviço</h3>
 
-            <div class="categoria-card">
-                <h3>Manutenção</h3>
-            </div>
+                <p>
+                    Publique um serviço e comece a receber propostas de clientes agora mesmo.
+                </p>
+
+                <a href="prestador/criar-servico.php" class="btn-recomendacao">
+                    Criar serviço
+                </a>
+
+            <?php else: ?>
+
+                <h3>
+                    <i class="fa-solid fa-briefcase"></i>
+                    Encontre seu primeiro serviço
+                </h3>
+
+                <p>
+                    Explore categorias e contrate profissionais confiáveis perto de você.
+                </p>
+
+                <a href="#servicos" class="btn-recomendacao">
+                    Ver serviços
+                </a>
+
+            <?php endif; ?>
 
         </div>
 
     </section>
 
-    <hr style="color: #111827; max-width: 84%; margin-left: 9.5rem    ;">
+    <section class="categorias-menu">
 
-    <section class="servicos">
-
-        <h2 class="section-title">
+    <h2 class="section-title">
             Serviços em destaque
         </h2>
+
+        <button class="btn-categorias" onclick="toggleCategorias()">
+            Categorias
+            <i class="fa-solid fa-chevron-down" id="icon-main"></i>
+        </button>
+
+        <div class="categorias-dropdown" id="categoriasDropdown">
+
+            <a href="home.php" class="categoria-item">Todas</a>
+
+            <?php foreach ($categorias as $cat): ?>
+                <a href="home.php?categoria=<?= $cat['id'] ?>" class="categoria-item">
+                    <?= htmlspecialchars($cat['nome']) ?>
+                </a>
+            <?php endforeach; ?>
+
+
+
+        </div>
+
+    </section>
+
+    <hr style="color: #111827; max-width: 100%; margin-left: 0.5rem; margin-bottom: 2rem;">
+
+    <section class="servicos categorias-menu">
+
+        
 
         <div class="servicos-grid">
 
@@ -206,9 +262,9 @@ $servicos = $servicoController->listar();
 
                             <div class="botoes">
 
-                            <button
-                                class="btn-ver-servico"
-                                onclick="abrirModalServico(
+                                <button
+                                    class="btn-ver-servico"
+                                    onclick="abrirModalServico(
         '<?= $servico['nome_servico'] ?>',
         '<?= $servico['prestador'] ?>',
         '<?= $servico['descricao'] ?>',
@@ -217,18 +273,18 @@ $servicos = $servicoController->listar();
         '<?= $servico['localizacao'] ?>',
         '<?= !empty($servico['foto']) ? $servico['foto'] : '../img/user.jpg' ?>'
     )">
-                                Ver serviço
-                            </button>
+                                    Ver serviço
+                                </button>
 
-                            <a
-                                href="Cliente/contratar-servico.php?id=<?= $servico['id'] ?>"
-                                class="btn-contratar">
-                                Contratar
-                            </a>
+                                <a
+                                    href="Cliente/contratar-servico.php?id=<?= $servico['id'] ?>"
+                                    class="btn-contratar">
+                                    Contratar
+                                </a>
 
-                        <?php endif; ?>
+                            <?php endif; ?>
 
-                        </div>
+                            </div>
 
                     </div>
 
@@ -352,4 +408,29 @@ $servicos = $servicoController->listar();
 
         document.getElementById('modalServico').style.display = 'none';
     }
+
+    function toggleCategorias() {
+        const dropdown = document.getElementById('categoriasDropdown');
+        dropdown.classList.toggle('ativo');
+    }
+
+    function toggleExpandir(event) {
+        event.stopPropagation();
+
+        const extra = document.getElementById('categoriasExtra');
+        const icon = document.getElementById('icon-expand');
+
+        extra.classList.toggle('ativo');
+        icon.classList.toggle('fa-rotate-180');
+    }
+
+    // fecha ao clicar fora
+    document.addEventListener('click', function(e) {
+        const menu = document.getElementById('categoriasDropdown');
+        const btn = document.querySelector('.btn-categorias');
+
+        if (!menu.contains(e.target) && !btn.contains(e.target)) {
+            menu.classList.remove('ativo');
+        }
+    });
 </script>

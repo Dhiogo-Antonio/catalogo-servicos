@@ -19,9 +19,14 @@
 
     <header>
 
-        <div class="logo">
-            Catálogo de Serviços
-        </div>
+         <div class="logo">
+    <div class="logo-icon">
+        <i class="fa-solid fa-screwdriver-wrench"></i>
+    </div>
+<div class="logo-text">
+        <span class="logo-name">ProServiços</span>
+    </div>
+</div>
 
         <div class="auth">
 
@@ -60,20 +65,7 @@
 
 
 
-            <form class="search-box">
-
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-                <input
-                    type="text"
-                    placeholder="O que você precisa?"
-                >
-
-                <button>
-                    Buscar
-                </button>
-
-            </form>
+           
 
 
 
