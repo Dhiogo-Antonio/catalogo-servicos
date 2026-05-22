@@ -427,6 +427,7 @@ nav a{
 
 .btn-ver-servico {
     width: 100%;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
