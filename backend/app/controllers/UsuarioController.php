@@ -19,7 +19,7 @@ class UsuarioController {
         return $servicoController->listarPorPrestador($usuarioId);
     }
 
-    // cliente
+    
     return $contratacaoController->listarPorCliente($usuarioId);
 }
 

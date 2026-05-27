@@ -61,7 +61,7 @@ class PerfilService {
 
 
 
-    /* ALTERAR FOTO */
+    
 
     public function alterarFoto($usuarioId, $arquivo) {
 

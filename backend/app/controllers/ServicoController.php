@@ -12,19 +12,19 @@ class ServicoController
         $this->servicoModel = new ServicoModel($pdo);
     }
 
-    // LISTAR TODOS (HOME)
+    
     public function listar()
     {
         return $this->servicoModel->listar();
     }
 
-    // LISTAR POR PRESTADOR
+    
     public function listarPorPrestador($prestadorId)
     {
         return $this->servicoModel->listarPorPrestador($prestadorId);
     }
 
-    // BUSCAR POR ID
+    
     public function buscarPorId($id)
     {
         return $this->servicoModel->buscarPorId($id);
@@ -35,13 +35,13 @@ class ServicoController
         return $this->servicoModel->buscarFiltrados($q, $categoriaId);
     }
 
-     // LISTAR POR CATEGORIA
+     
      public function listarPorCategoria($categoriaId)
      {
          return $this->servicoModel->listarPorCategoria($categoriaId);
      }
 
-    // CRIAR SERVIÇO
+    
     public function criar(
         $usuarioId,
     $categoriaId,
@@ -62,7 +62,7 @@ class ServicoController
         );
     }
 
-    // EDITAR SERVIÇO
+   
     public function editar(
         $id,
         $nome_servico,

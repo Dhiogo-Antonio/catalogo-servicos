@@ -329,11 +329,6 @@ h3 i {
     background: #f3f4f6;
 }
 
-
-
-
-
-
 .servicos {
     padding: 70px 8%;
     background: #f8fafc;
@@ -350,7 +345,6 @@ h3 i {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 30px;
-
     align-items: stretch;
 }
 
@@ -358,6 +352,7 @@ h3 i {
     display: flex;
     flex-direction: column;
     flex: 1;
+    height: 100%;
     position: relative;
     background: #fff;
     border-radius: 22px;

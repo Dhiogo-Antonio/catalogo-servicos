@@ -59,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>
         Criar Serviço
     </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link
         rel="stylesheet"
@@ -70,30 +71,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 </head>
 <body>
-    <header>
-
-        <div class="logo">
-            Catálogo de Serviços
-        </div>
-
-        <nav>
-
-            <a href="../../home.php">
-                Voltar
-            </a>
-
-
-        </nav>
-
-    </header>
+    
 
 <div class="page">
 
     <div class="form-box">
 
-        <h1>
-            Criar Serviço
-        </h1>
+    <div class="logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+            </div>
+            <div class="logo-text">
+                <span class="logo-name">ProServiços</span>
+            </div>
+        </div>
+        <br>
+
 
         <?php if($mensagem): ?>
 

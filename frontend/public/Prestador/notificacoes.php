@@ -114,7 +114,7 @@ $contratos = $controller->listarParaPrestador($prestadorId);
         <?= $contrato['mensagem'] ?>
     </p>
 
-    <?php if ($contrato['status'] === 'pendente'): ?>
+    <?php if (strtolower(trim($contrato['status'])) === 'pendente'): ?>
 
 <div class="acoes">
 

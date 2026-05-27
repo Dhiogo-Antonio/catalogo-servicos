@@ -70,6 +70,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <title>
         Login
     </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link
         rel="stylesheet"
@@ -83,9 +84,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         <section class="auth-panel">
 
-            <h1>
-                Login
-            </h1>
+           <div class="logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+            </div>
+            <div class="logo-text">
+                <span class="logo-name">ProServiços</span>
+            </div>
+        </div>
 
             <p class="muted">
 

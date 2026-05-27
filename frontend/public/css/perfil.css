@@ -155,20 +155,60 @@ body {
 }
 
 
+.profile-actions{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
 
-.profile-actions {
-    display: flex;
-    gap: 15px;
+.btn-servicos{
+    padding:12px 18px;
+
+    border-radius:14px;
+    background:#fff;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.btn-servicos:hover{
+    transform:translateY(-2px);
+}
+
+.profile-actions .btn-logout{
+    padding:12px 18px;
+
+    border-radius:14px;
+
+    background:#11172a;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.btn-logout:hover{
+    background:#1e293b;
+    transform:translateY(-2px);
 }
 
 .profile-actions a {
-    background: #11172a;
-    color: #fff;
+    color: #161e36;
 
     padding: 12px 22px;
 
     border-radius: 10px;
-
+    border: 2px solid #11172a;
     text-decoration: none;
     font-weight: 600;
 
@@ -177,15 +217,16 @@ body {
 
 .profile-actions a:hover {
     background: #161e36;
+    color: #fff;
 }
 
 
 
 .grid {
-    display: grid;
+    display: flex;
+    justify-content: center;
     grid-template-columns: 2fr 1fr;
     gap: 25px;
-
     margin-top: 35px;
 }
 
@@ -193,16 +234,44 @@ body {
 
 .card {
     display: flex;
-    flex-direction: column;
-    background: #fff;
+    justify-content: space-between;
+    align-items: flex-start;
 
-    border-radius: 18px;
+    background: #ffffff;
+    width: 100%;
 
-    padding: 30px;
+    border-radius: 22px;
 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    gap: 40px;
+    padding: 35px 40px;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.15),
+        0 2px 6px rgba(0,0,0,0.08);
+
+    transition: 0.3s ease;
+
+    position: relative;
+    overflow: hidden;
 }
 
+
+.card-esquerdo {
+    flex: 1;
+
+    padding-right: 30px;
+    border-right: 1px solid #e5e7eb;
+}
+
+.card-direito {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    padding-left: 10px;
+}
 
 
 
@@ -215,7 +284,7 @@ body {
     font-size: 24px;
 
     border-left: 5px solid #11172a;
-
+    
     padding-left: 12px;
 
     color: #11172a;
@@ -317,7 +386,7 @@ body {
     align-items: center;
 
     gap: 15px;
-
+    margin-bottom: 1.5rem;
     padding: 18px 0;
 
     border-bottom: 1px solid #e2e8f0;

@@ -56,6 +56,7 @@ $contratacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <title>Serviços Contratados</title>
 
@@ -67,10 +68,8 @@ $contratacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
 
-    <a href="../home.php" class="btn-back">
-
-        ← Voltar
-
+    <a href="../perfil.php" class="btn-back">
+        <i class="fa-solid fa-arrow-left"></i>
     </a>
 
 
@@ -116,6 +115,10 @@ $contratacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <?= htmlspecialchars($c['nome_servico']) ?>
 
                                 </h2>
+
+                                <div class="status <?= $c['status'] ?>">
+                                    <?= ucfirst($c['status']) ?>
+                                </div>
 
                             </div>
 
@@ -174,9 +177,12 @@ $contratacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                         <div class="localizacao">
 
-                            📍 <?= htmlspecialchars($c['localizacao']) ?>
+                            <i class="fa-solid fa-map-marker-alt"></i>
+                            <?= htmlspecialchars($c['localizacao']) ?>
 
                         </div>
+
+
 
                     </div>
 
@@ -200,4 +206,4 @@ $contratacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </body>
 
-</html> 
+</html>

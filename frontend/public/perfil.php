@@ -40,7 +40,7 @@ if ($usuario['tipo'] === 'prestador') {
 }
 
 
-/* ALTERAR SENHA */
+
 
 if (isset($_POST['alterar_senha'])) {
 
@@ -57,7 +57,6 @@ if (isset($_POST['alterar_senha'])) {
 }
 
 
-/* ALTERAR FOTO */
 
 if (isset($_POST['alterar_foto'])) {
 
@@ -85,6 +84,7 @@ if (isset($_POST['alterar_foto'])) {
         content="width=device-width, initial-scale=1.0">
 
     <title>Perfil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <link
         rel="stylesheet"
@@ -118,7 +118,7 @@ if (isset($_POST['alterar_foto'])) {
         <div class="banner"></div>
 
 
-        <!-- PERFIL -->
+        
 
         <div class="profile-bar">
 
@@ -214,260 +214,203 @@ if (isset($_POST['alterar_foto'])) {
             </div>
 
 
-            <div class="profile-actions">
+           <div class="profile-actions">
 
-                <a href="logout.php">
+    <?php if ($usuario['tipo'] === 'prestador'): ?>
 
-                    Sair
+        <a
+            href="Prestador/servicos/meus-servicos.php"
+            class="btn-servicos">
 
-                </a>
+            Meus Serviços
 
-            </div>
-
-        </div>
-
-
-
-        <!-- GRID -->
-<div class="grid">
-
-
-    <!-- LADO ESQUERDO -->
-
-    <div>
-
-
-        <!-- INFORMAÇÕES -->
-
-        <div class="card">
-
-            <div class="card-title">
-
-                <h2>Informações</h2>
-
-            </div>
-
-
-            <div class="info-row">
-
-                <div class="info-icon">✉</div>
-
-                <div>
-
-                    <div class="info-label">
-                        Email
-                    </div>
-
-                    <div class="info-val">
-                        <?= htmlspecialchars($usuario['email']) ?>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="info-row">
-
-                <div class="info-icon">☎</div>
-
-                <div>
-
-                    <div class="info-label">
-                        Telefone
-                    </div>
-
-                    <div class="info-val">
-                        <?= htmlspecialchars($usuario['telefone']) ?>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="info-row">
-
-                <div class="info-icon">◈</div>
-
-                <div>
-
-                    <div class="info-label">
-                        Tipo de conta
-                    </div>
-
-                    <div class="info-val">
-                        <?= htmlspecialchars($usuario['tipo']) ?>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- ALTERAR SENHA -->
-
-        <div class="card" style="margin-top: 25px;">
-
-            <div class="card-title">
-
-                <h2>Alterar Senha</h2>
-
-            </div>
-
-
-            <?php if (!empty($mensagem)): ?>
-
-                <div class="msg-alert">
-
-                    <?= $mensagem ?>
-
-                </div>
-
-            <?php endif; ?>
-
-
-            <form
-                method="POST"
-                class="form-senha">
-
-
-                <div class="input-group">
-
-                    <label>Email</label>
-
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Digite seu email"
-                        required>
-
-                </div>
-
-
-
-                <div class="input-group">
-
-                    <label>Nova senha</label>
-
-                    <input
-                        type="password"
-                        name="nova_senha"
-                        placeholder="Digite sua nova senha"
-                        required>
-
-                </div>
-
-
-
-                <div class="input-group">
-
-                    <label>Confirmar senha</label>
-
-                    <input
-                        type="password"
-                        name="confirmar_senha"
-                        placeholder="Confirme sua nova senha"
-                        required>
-
-                </div>
-
-
-
-                <button
-                    type="submit"
-                    name="alterar_senha"
-                    class="btn-salvar">
-
-                    Alterar Senha
-
-                </button>
-
-            </form>
-
-        </div>
-
-    </div>
-
-
-
-
-    <!-- LADO DIREITO -->
-
-   <div class="card card-services">
-
-    <div class="card-title">
-        <h2>Seus Serviços</h2>
-    </div>
-
-    <?php $limite = 5; $i = 0; ?>
-
-    <?php if (!empty($servicos)): ?>
-
-        <?php foreach ($servicos as $s): ?>
-
-            <?php if ($i++ >= $limite) break; ?>
-
-            <div class="service">
-
-                <div class="service-info">
-
-                    <h4>
-                        <?= htmlspecialchars($s['nome_servico'] ?? 'Serviço') ?>
-                    </h4>
-
-                    <p>
-                        <?= htmlspecialchars($s['solicitacao'] ?? $s['descricao'] ?? 'Sem descrição') ?>
-                    </p>
-
-                </div>
-
-                <div class="price">
-                    R$ <?= number_format($s['preco'] ?? 0, 2, ',', '.') ?>
-                </div>
-
-                
-
-            </div>
-
-            
-
-        <?php endforeach; ?>
-
-         <a
-    class="btn"
-    href="<?= $usuario['tipo'] === 'prestador'
-        ? 'Prestador/servicos/meus-servicos.php'
-        : 'Cliente/servicos-contratados.php' ?>">
-
-    Ver Mais
-</a>
-
-        <?php if (count($servicos) > $limite): ?>
-            <a
-    class="btn"
-    href="<?= $usuario['tipo'] === 'prestador'
-        ? 'Prestador/servicos/meus-servicos.php'
-        : 'Cliente/servicos-contratados.php' ?>">
-
-    Ver Mais
-</a>
-        <?php endif; ?>
+        </a>
 
     <?php else: ?>
 
-        <p>
-            Nenhum serviço encontrado.
-        </p>
+        <a
+            href="Cliente/servicos-contratados.php"
+            class="btn-servicos">
+
+            Minhas Contratações
+
+        </a>
 
     <?php endif; ?>
 
+
+   <a href="logout.php" class="btn-logout">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    Sair
+</a>
+
 </div>
+
+        </div>
+
+
+
+
+<div class="grid">
+
+    <div class="card card-perfil">
+
+    <div class="card-esquerdo">
+        <div class="card-title">
+
+            <h2>Informações da Conta</h2>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <div class="info-icon">
+        <i class="fa-solid fa-envelope"></i>
+    </div>
+
+            <div>
+
+                <div class="info-label">
+                    Email
+                </div>
+
+                <div class="info-val">
+                    <?= htmlspecialchars($usuario['email']) ?>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <div class="info-icon">
+        <i class="fa-solid fa-phone"></i>
+    </div>
+
+            <div>
+
+                <div class="info-label">
+                    Telefone
+                </div>
+
+                <div class="info-val">
+                    <?= htmlspecialchars($usuario['telefone']) ?>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <div class="info-icon">
+        <i class="fa-solid fa-user-tag"></i>
+    </div>
+
+            <div>
+
+                <div class="info-label">
+                    Tipo de conta
+                </div>
+
+                <div class="info-val">
+                    <?= htmlspecialchars($usuario['tipo']) ?>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        </div>
+
+<div class="card-direito">
+
+
+        <div class="card-title">
+
+        
+
+            <h2>Alterar Senha</h2>
+
+        </div>
+
+
+        <?php if (!empty($mensagem)): ?>
+
+            <div class="msg-alert">
+
+                <?= $mensagem ?>
+
+            </div>
+
+        <?php endif; ?>
+
+
+        <form
+            method="POST"
+            class="form-senha">
+
+
+            <div class="input-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Digite seu email"
+                    required>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>Nova senha</label>
+
+                <input
+                    type="password"
+                    name="nova_senha"
+                    placeholder="Digite sua nova senha"
+                    required>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>Confirmar senha</label>
+
+                <input
+                    type="password"
+                    name="confirmar_senha"
+                    placeholder="Confirme sua nova senha"
+                    required>
+
+            </div>
+
+
+            <button
+                type="submit"
+                name="alterar_senha"
+                class="btn-salvar">
+
+                Alterar Senha
+
+            </button>
+
+        </form>
+
+        
+
+    </div>
+
+    </div>
 
 </div>
 

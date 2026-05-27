@@ -193,6 +193,50 @@ body {
     font-weight: 500;
 }
 
+.status {
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* PENDENTE */
+.status.pendente {
+    background: #facc15;
+    color: #111827;
+}
+
+/* ACEITO */
+.status.aceito {
+    background: #22c55e;
+    color: #fff;
+}
+
+/* EM ANDAMENTO */
+.status.em_andamento {
+    background: #3b82f6;
+    color: #fff;
+}
+
+/* CONCLUÍDO */
+.status.concluido {
+    background: #10b981;
+    color: #fff;
+}
+
+/* RECUSADO */
+.status.recusado {
+    background: #ef4444;
+    color: #fff;
+}
+
 /* EMPTY */
 
 .empty {

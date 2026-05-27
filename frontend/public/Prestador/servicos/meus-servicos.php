@@ -42,7 +42,7 @@ $servicos = $servicoController->listarPorPrestador($prestadorId);
 
     <div class="topo">
 
-        <a href="../../home.php" class="btn-back">
+        <a href="../../perfil.php" class="btn-back">
             <i class="fa-solid fa-arrow-left"></i>
         </a>
 
