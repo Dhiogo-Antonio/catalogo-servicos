@@ -20,8 +20,26 @@ class ContratacaoController {
         );
     }
 
+    public function listarParaPrestador($prestadorId)
+{
+    return $this->contratacaoModel
+        ->listarParaPrestador($prestadorId);
+}
+
+public function atualizarStatus($id, $status)
+{
+    return $this->contratacaoModel
+        ->atualizarStatus($id, $status);
+}
+
     public function listarPorCliente($clienteId) {
 
         return $this->contratacaoModel->listarPorCliente($clienteId);
     }
+
+    public function contarPendentes($prestadorId)
+{
+    return $this->contratacaoModel
+        ->contarPendentes($prestadorId);
+}
 }

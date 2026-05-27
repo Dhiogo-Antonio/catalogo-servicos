@@ -5,6 +5,7 @@ session_start();
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/database.php";
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ServicoController.php";
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/CategoriaController.php";
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ContratacaoController.php";
 
 $categoriaController = new CategoriaController($pdo);
 $categorias = $categoriaController->listar();
@@ -18,6 +19,20 @@ $q = $_GET['q'] ?? null;
 $categoriaId = $_GET['categoria'] ?? null;
 
 $servicos = $servicoController->buscarFiltrados($q, $categoriaId);
+
+
+$notificacoes = 0;
+
+if (
+    !empty($_SESSION['usuario']) &&
+    $_SESSION['usuario']['tipo'] === 'prestador'
+) {
+
+    $contratacaoController = new ContratacaoController($pdo);
+
+    $notificacoes = $contratacaoController
+        ->contarPendentes($_SESSION['usuario']['id']);
+}
 
 ?>
 
@@ -39,47 +54,80 @@ $servicos = $servicoController->buscarFiltrados($q, $categoriaId);
     <header>
 
         <div class="logo">
-    <div class="logo-icon">
-        <i class="fa-solid fa-screwdriver-wrench"></i>
-    </div>
-<div class="logo-text">
-        <span class="logo-name">ProServiços</span>
-    </div>
-</div>
+            <div class="logo-icon">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+            </div>
+            <div class="logo-text">
+                <span class="logo-name">ProServiços</span>
+            </div>
+        </div>
 
         <nav>
 
-            <form class="search-box" method="GET" action="home.php">
-                <input
-                    type="text"
-                    name="q"
-                    placeholder="Buscar serviços"
-                    value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
+    <?php
 
-                <button type="submit">
-                    <i class="fa-solid fa-magnifying-glass" style="color: #111827;"></i>
-                </button>
-            </form>
+    $linkNotificacao = "#";
 
-            <?php if (!empty($_SESSION['usuario'])): ?>
+    if (!empty($_SESSION['usuario'])) {
 
-                <?php if (($_SESSION['usuario']['tipo'] ?? '') === 'prestador'): ?>
+        if ($_SESSION['usuario']['tipo'] === 'prestador') {
+
+            $linkNotificacao = "Prestador/notificacoes.php";
+
+        } else {
+
+            $linkNotificacao = "Cliente/notificacoes.php";
+        }
+    }
+
+    ?>
+
+    <form class="search-box" method="GET" action="home.php">
+
+        <input
+            type="text"
+            name="q"
+            placeholder="Buscar serviços"
+            value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
+
+        <button type="submit">
+            <i class="fa-solid fa-magnifying-glass" style="color: #111827;"></i>
+        </button>
+
+        <?php if (!empty($_SESSION['usuario'])): ?>
+
+            <a href="<?= $linkNotificacao ?>" class="icon-user notificacao-icon">
+
+                <i class="fa-solid fa-bell"></i>
+
+                <?php if ($notificacoes > 0): ?>
+
+                    <span class="badge-notificacao">
+                        <?= $notificacoes ?>
+                    </span>
 
                 <?php endif; ?>
 
-                <a href="perfil.php" class="icon-user">
-                    <i class="fa-solid fa-user"></i>
-                </a>
+            </a>
 
-            <?php else: ?>
+        <?php endif; ?>
 
-                <a href="login.php">Entrar</a>
-                <a href="cadastro.php">Cadastrar</a>
+    </form>
 
-            <?php endif; ?>
+    <?php if (!empty($_SESSION['usuario'])): ?>
 
+        <a href="perfil.php" class="icon-user">
+            <i class="fa-solid fa-user"></i>
+        </a>
 
-        </nav>
+    <?php else: ?>
+
+        <a href="login.php">Entrar</a>
+        <a href="cadastro.php">Cadastrar</a>
+
+    <?php endif; ?>
+
+</nav>
 
     </header>
 
@@ -138,7 +186,7 @@ $servicos = $servicoController->buscarFiltrados($q, $categoriaId);
 
     <section class="categorias-menu">
 
-    <h2 class="section-title">
+        <h2 class="section-title">
             Serviços em destaque
         </h2>
 
@@ -167,7 +215,7 @@ $servicos = $servicoController->buscarFiltrados($q, $categoriaId);
 
     <section class="servicos categorias-menu">
 
-        
+
 
         <div class="servicos-grid">
 

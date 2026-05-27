@@ -8,22 +8,67 @@ class ContratacaoModel {
         $this->pdo = $pdo;
     }
 
-    public function contratar($clienteId, $servicoId, $mensagem) {
+    public function contratar($clienteId, $servicoId, $mensagem)
+{
+    $sql = "INSERT INTO contratacoes
+    (
+        cliente_id,
+        servico_id,
+        mensagem,
+        status
+    )
+    VALUES (?, ?, ?, 'pendente')";
 
-        $sql = "INSERT INTO contratacoes (
-            cliente_id,
-            servico_id,
-            mensagem
-        ) VALUES (?, ?, ?)";
+    $stmt = $this->pdo->prepare($sql);
 
-        $stmt = $this->pdo->prepare($sql);
+    return $stmt->execute([
+        $clienteId,
+        $servicoId,
+        $mensagem
+    ]);
+}
 
-        return $stmt->execute([
-            $clienteId,
-            $servicoId,
-            $mensagem
-        ]);
-    }
+
+public function listarParaPrestador($prestadorId)
+{
+    $sql = "SELECT
+            c.*,
+            u.nome AS cliente,
+            s.nome_servico
+
+        FROM contratacoes c
+
+        INNER JOIN usuarios u
+        ON c.cliente_id = u.id
+
+        INNER JOIN servicos s
+        ON c.servico_id = s.id
+
+        WHERE s.usuario_id = ?
+        AND c.status NOT IN ('concluido', 'recusado')
+
+        ORDER BY c.id DESC";
+
+    $stmt = $this->pdo->prepare($sql);
+
+    $stmt->execute([$prestadorId]);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function atualizarStatus($id, $status)
+{
+    $sql = "UPDATE contratacoes
+            SET status = ?
+            WHERE id = ?";
+
+    $stmt = $this->pdo->prepare($sql);
+
+    return $stmt->execute([
+        $status,
+        $id
+    ]);
+}
 
    public function listarPorCliente($clienteId) {
 
@@ -45,6 +90,24 @@ class ContratacaoModel {
     $stmt->execute([$clienteId]);
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+public function contarPendentes($prestadorId)
+{
+    $sql = "SELECT COUNT(*) as total
+            FROM contratacoes c
+
+            INNER JOIN servicos s
+            ON c.servico_id = s.id
+
+            WHERE s.usuario_id = ?
+            AND c.status = 'pendente'";
+
+    $stmt = $this->pdo->prepare($sql);
+
+    $stmt->execute([$prestadorId]);
+
+    return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
 }
 }
 ?>
