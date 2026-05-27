@@ -80,9 +80,11 @@ nav a {
      outline: none;
  }
 
+
+
  .form-group textarea {
-     resize: vertical;
-     min-height: 120px;
+     min-height:220px;
+    resize:vertical;
  }
 
  .form-group select:focus,

@@ -127,9 +127,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </label>
 
                 <textarea
-                    name="descricao"
-                    required
-                ></textarea>
+    name="descricao"
+    maxlength="3000"
+    placeholder="Descreva detalhadamente seu serviço..."
+    required
+></textarea>
 
             </div>
 

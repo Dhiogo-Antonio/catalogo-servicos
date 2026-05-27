@@ -64,70 +64,69 @@ if (
 
         <nav>
 
-    <?php
+            <?php
 
-    $linkNotificacao = "#";
+            $linkNotificacao = "#";
 
-    if (!empty($_SESSION['usuario'])) {
+            if (!empty($_SESSION['usuario'])) {
 
-        if ($_SESSION['usuario']['tipo'] === 'prestador') {
+                if ($_SESSION['usuario']['tipo'] === 'prestador') {
 
-            $linkNotificacao = "Prestador/notificacoes.php";
+                    $linkNotificacao = "Prestador/notificacoes.php";
+                } else {
 
-        } else {
+                    $linkNotificacao = "Cliente/notificacoes.php";
+                }
+            }
 
-            $linkNotificacao = "Cliente/notificacoes.php";
-        }
-    }
+            ?>
 
-    ?>
+            <form class="search-box" method="GET" action="home.php">
 
-    <form class="search-box" method="GET" action="home.php">
+                <input
+                    type="text"
+                    name="q"
+                    placeholder="Buscar serviços"
+                    value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
 
-        <input
-            type="text"
-            name="q"
-            placeholder="Buscar serviços"
-            value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
+                <button type="submit">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #111827;"></i>
+                </button>
 
-        <button type="submit">
-            <i class="fa-solid fa-magnifying-glass" style="color: #111827;"></i>
-        </button>
+                <?php if (!empty($_SESSION['usuario'])): ?>
 
-        <?php if (!empty($_SESSION['usuario'])): ?>
+                    <a href="<?= $linkNotificacao ?>" class="icon-user notificacao-icon">
 
-            <a href="<?= $linkNotificacao ?>" class="icon-user notificacao-icon">
+                        <i class="fa-solid fa-bell"></i>
 
-                <i class="fa-solid fa-bell"></i>
+                        <?php if ($notificacoes > 0): ?>
 
-                <?php if ($notificacoes > 0): ?>
+                            <span class="badge-notificacao">
+                                <?= $notificacoes ?>
+                            </span>
 
-                    <span class="badge-notificacao">
-                        <?= $notificacoes ?>
-                    </span>
+                        <?php endif; ?>
+
+                    </a>
 
                 <?php endif; ?>
 
-            </a>
+            </form>
 
-        <?php endif; ?>
+            <?php if (!empty($_SESSION['usuario'])): ?>
 
-    </form>
+                <a href="perfil.php" class="icon-user">
+                    <i class="fa-solid fa-user"></i>
+                </a>
 
-    <?php if (!empty($_SESSION['usuario'])): ?>
+            <?php else: ?>
 
-        <a href="perfil.php" class="icon-user">
-            <i class="fa-solid fa-user"></i>
-        </a>
+                <a href="login.php">Entrar</a>
+                <a href="cadastro.php">Cadastrar</a>
 
-    <?php else: ?>
+            <?php endif; ?>
 
-        <a href="login.php">Entrar</a>
-        <a href="cadastro.php">Cadastrar</a>
-
-    <?php endif; ?>
-
-</nav>
+        </nav>
 
     </header>
 
@@ -219,129 +218,134 @@ if (
 
         <div class="servicos-grid">
 
-            <?php foreach ($servicos as $servico): ?>
+    <?php foreach ($servicos as $servico): ?>
 
-                <div class="card-servico">
+        <div class="card-servico">
 
-                    <div class="top-card">
+            <div class="top-card">
 
-                        <div class="perfil-area">
+                <div class="perfil-area">
 
-                            <img
-                                src="<?= !empty($servico['foto']) ? $servico['foto'] : '../img/user.jpg' ?>"
-                                alt="Prestador"
-                                class="foto-prestador">
+                    <img
+                        src="<?= !empty($servico['foto']) ? $servico['foto'] : '../img/user.jpg' ?>"
+                        alt="Prestador"
+                        class="foto-prestador">
 
-                            <div class="perfil-info">
+                    <div class="perfil-info">
 
-                                <span class="nome-prestador">
-                                    <?= $servico['prestador'] ?>
-                                </span>
+                        <span class="nome-prestador">
+                            <?= $servico['prestador'] ?>
+                        </span>
 
-                                <h3>
-                                    <?= $servico['nome_servico'] ?>
-                                </h3>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="card-content">
-
-                        <p class="descricao">
-                            <?= mb_strimwidth($servico['descricao'], 0, 120, '...') ?>
-                        </p>
-
-                        <p class="localizacao">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <?= $servico['localizacao'] ?>
-                        </p>
-
-                        <div class="info-servico">
-
-                            <div class="info-box">
-
-                                <span class="label">
-                                    Prazo
-                                </span>
-
-                                <strong>
-                                    <?= $servico['prazo'] ?> dias
-                                </strong>
-
-                            </div>
-
-                            <div class="info-box">
-
-                                <span class="label">
-                                    Preço
-                                </span>
-
-                                <strong class="preco">
-                                    R$ <?= number_format($servico['preco'], 2, ',', '.') ?>
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                        <?php if (
-                            isset($_SESSION['usuario']) &&
-                            $_SESSION['usuario']['tipo'] === 'prestador'
-                        ): ?>
-
-                            <button
-                                class="btn-ver-servico"
-                                onclick="abrirModalServico(
-        '<?= $servico['nome_servico'] ?>',
-        '<?= $servico['prestador'] ?>',
-        '<?= $servico['descricao'] ?>',
-        '<?= $servico['prazo'] ?>',
-        '<?= $servico['preco'] ?>',
-        '<?= $servico['localizacao'] ?>',
-        '<?= !empty($servico['foto']) ? $servico['foto'] : '../img/user.jpg' ?>'
-    )">
-                                Ver serviço
-                            </button>
-
-                        <?php else: ?>
-
-                            <div class="botoes">
-
-                                <button
-                                    class="btn-ver-servico"
-                                    onclick="abrirModalServico(
-        '<?= $servico['nome_servico'] ?>',
-        '<?= $servico['prestador'] ?>',
-        '<?= $servico['descricao'] ?>',
-        '<?= $servico['prazo'] ?>',
-        '<?= $servico['preco'] ?>',
-        '<?= $servico['localizacao'] ?>',
-        '<?= !empty($servico['foto']) ? $servico['foto'] : '../img/user.jpg' ?>'
-    )">
-                                    Ver serviço
-                                </button>
-
-                                <a
-                                    href="Cliente/contratar-servico.php?id=<?= $servico['id'] ?>"
-                                    class="btn-contratar">
-                                    Contratar
-                                </a>
-
-                            <?php endif; ?>
-
-                            </div>
+                        <h3>
+                            <?= $servico['nome_servico'] ?>
+                        </h3>
 
                     </div>
 
                 </div>
 
-            <?php endforeach; ?>
+            </div>
+
+            <div class="card-content">
+
+                <p class="descricao">
+                    <?= mb_strimwidth($servico['descricao'], 0, 120, '...') ?>
+                </p>
+
+                <p class="localizacao">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <?= $servico['localizacao'] ?>
+                </p>
+
+                <div class="info-servico">
+
+                    <div class="info-box">
+
+                        <span class="label">
+                            Prazo
+                        </span>
+
+                        <strong>
+                            <?= $servico['prazo'] ?> dias
+                        </strong>
+
+                    </div>
+
+                    <div class="info-box">
+
+                        <span class="label">
+                            Preço
+                        </span>
+
+                        <strong class="preco">
+                            R$ <?= number_format($servico['preco'], 2, ',', '.') ?>
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <?php if (
+                    isset($_SESSION['usuario']) &&
+                    $_SESSION['usuario']['tipo'] === 'prestador'
+                ): ?>
+
+                    <button
+                        class="btn-ver-servico"
+                        onclick="abrirModalServico(
+                            '<?= $servico['nome_servico'] ?>',
+                            '<?= $servico['prestador'] ?>',
+                            '<?= $servico['descricao'] ?>',
+                            '<?= $servico['prazo'] ?>',
+                            '<?= $servico['preco'] ?>',
+                            '<?= $servico['localizacao'] ?>',
+                            '<?= !empty($servico['foto']) ? $servico['foto'] : '../img/user.jpg' ?>'
+                        )">
+
+                        Ver serviço
+
+                    </button>
+
+                <?php else: ?>
+
+                    <div class="botoes">
+
+                        <button
+                            class="btn-ver-servico"
+                            onclick="abrirModalServico(
+                                '<?= $servico['nome_servico'] ?>',
+                                '<?= $servico['prestador'] ?>',
+                                '<?= $servico['descricao'] ?>',
+                                '<?= $servico['prazo'] ?>',
+                                '<?= $servico['preco'] ?>',
+                                '<?= $servico['localizacao'] ?>',
+                                '<?= !empty($servico['foto']) ? $servico['foto'] : '../img/user.jpg' ?>'
+                            )">
+
+                            Ver serviço
+
+                        </button>
+
+                        <a
+                            href="Cliente/contratar-servico.php?id=<?= $servico['id'] ?>"
+                            class="btn-contratar">
+
+                            Contratar
+
+                        </a>
+
+                    </div>
+
+                <?php endif; ?>
+
+            </div>
 
         </div>
 
+    <?php endforeach; ?>
+
+</div>
     </section>
 
 
@@ -407,9 +411,12 @@ if (
 
                 </div>
 
-                <div class="modal-localizacao">
+                <div class="modal-localizacao"  id="modal-localizacao">
 
-                    📍 <span id="modal-localizacao"></span>
+                    <p class="localizacao">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <?= $servico['localizacao'] ?>
+                </p>
 
                 </div>
 

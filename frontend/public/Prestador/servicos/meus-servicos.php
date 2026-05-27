@@ -33,108 +33,109 @@ $servicos = $servicoController->listarPorPrestador($prestadorId);
 <head>
     <meta charset="UTF-8">
     <title>Meus Serviços</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../../css/meus-servicos.css">
 </head>
 
 <body>
 
-    <header>
 
-        <div class="logo">
-            Catálogo de Serviços
-        </div>
+    <div class="topo">
 
-        <nav>
+        <a href="../../home.php" class="btn-back">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
 
-            <a href="../../home.php">
-                Voltar
-            </a>
+        <h1>
+            Meus Serviços
+        </h1>
 
+        <a href="criar-servico.php" class="btn-criar">
+            + Criar serviço
+        </a>
 
-
-            <a href="criar-servico.php" class="btn-primary">
-                + Criar serviço
-            </a>
-
-        </nav>
-
-    </header>
-
+    </div>
 
     <section class="servicos">
 
-        <h2>Seus serviços</h2>
+        <?php if (empty($servicos)): ?>
 
-        <div class="servicos-grid">
+            <div class="vazio">
 
-            <?php if (empty($servicos)): ?>
+                <i class="fa-solid fa-briefcase"></i>
+
+                <h2>
+                    Nenhum serviço criado
+                </h2>
 
                 <p>
-                    Você ainda não criou serviços.
+                    Crie seu primeiro serviço para começar a receber clientes.
                 </p>
 
-            <?php endif; ?>
+            </div>
 
+        <?php else: ?>
 
-            <?php foreach ($servicos as $servico): ?>
+            <div class="servicos-grid">
 
-                <div class="card-servico">
+                <?php foreach ($servicos as $servico): ?>
 
-                    <h3>
-                        <?= $servico['nome_servico'] ?>
-                    </h3>
+                    <div class="card-servico">
 
-                    <p class="descricao">
-                        <?= $servico['descricao'] ?>
-                    </p>
+    <h3>
+        <?= $servico['nome_servico'] ?>
+    </h3>
 
-                    <div class="info">
+    <p class="descricao">
+        <?= $servico['descricao'] ?>
+    </p>
 
-                        <span>
-                            <?= $servico['prazo'] ?> dias
-                        </span>
+    <div class="info">
 
-                        <span>
-                            ⭐ <?= $servico['avaliacao'] ?? 0 ?>
-                        </span>
+        <span>
+    <i class="fa-regular fa-clock"></i>
+    <?= $servico['prazo'] ?> dia(s)
+</span>
 
-                    </div>
+<div class="preco">
+        R$ <?= number_format($servico['preco'], 2, ',', '.') ?>
+    </div>
+    </div>
 
-                    <div class="preco">
-                        R$ <?= $servico['preco'] ?>
-                    </div>
+    
 
-                    <div class="acoes">
+    <div class="acoes">
 
-                        <button
-    class="btn-editar"
-    onclick="abrirModal(
-        '<?= $servico['id'] ?>',
-        '<?= $servico['nome_servico'] ?>',
-        '<?= $servico['descricao'] ?>',
-        '<?= $servico['preco'] ?>',
-        '<?= $servico['prazo'] ?>',
-        '<?= $servico['localizacao'] ?>',
-        '<?= $servico['categoria_id'] ?>'
-    )"
->
-    Editar
-</button>
+        <button
+            class="btn-editar"
+            onclick="abrirModal(
+                '<?= $servico['id'] ?>',
+                '<?= $servico['nome_servico'] ?>',
+                '<?= $servico['descricao'] ?>',
+                '<?= $servico['preco'] ?>',
+                '<?= $servico['prazo'] ?>',
+                '<?= $servico['localizacao'] ?>',
+                '<?= $servico['categoria_id'] ?>'
+            )"
+        >
+            Editar
+        </button>
 
-                        <a href="deletar-servico.php?id=<?= $servico['id'] ?>">
-                            Excluir
-                        </a>
+        <a href="deletar-servico.php?id=<?= $servico['id'] ?>">
+            Excluir
+        </a>
 
-                    </div>
+    </div>
 
-                </div>
+</div>
 
-            <?php endforeach; ?>
+                <?php endforeach; ?>
 
-        </div>
+            </div>
+
+        <?php endif; ?>
 
     </section>
-
     <div class="modal" id="modalEditar">
 
     <div class="modal-content">
@@ -207,7 +208,7 @@ $servicos = $servicoController->listarPorPrestador($prestadorId);
             <div class="form-group">
 
                 <label>
-                    Prazo
+                    Prazo (dias)
                 </label>
 
                 <input

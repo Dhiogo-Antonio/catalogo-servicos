@@ -329,30 +329,10 @@ h3 i {
     background: #f3f4f6;
 }
 
-/* botão expandir */
-.btn-expandir {
-    width: 100%;
-    border: none;
-    background: #f3f4f6;
-    padding: 12px;
-    cursor: pointer;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
-/* área extra (segunda etapa) */
-.categorias-extra {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height .4s ease;
-    background: #fafafa;
-}
 
-.categorias-extra.ativo {
-    max-height: 300px;
-}
+
 
 .servicos {
     padding: 70px 8%;
@@ -371,7 +351,7 @@ h3 i {
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 30px;
 
-    align-items: stretch; /* 🔥 ESSENCIAL */
+    align-items: stretch;
 }
 
 .card-servico{
@@ -488,6 +468,24 @@ h3 i {
     text-overflow:ellipsis;
 
     min-height:78px;
+}
+
+#modal-descricao{
+    color:#4b5563;
+    font-size:15px;
+    line-height:1.8;
+
+    margin-bottom:25px;
+
+    display:block;
+
+    overflow:visible;
+    text-overflow:unset;
+
+    -webkit-line-clamp:unset;
+    -webkit-box-orient:unset;
+
+    white-space:normal;
 }
 
 .localizacao{
@@ -672,6 +670,7 @@ footer {
 
     margin-bottom:25px;
 }
+
 
 .detalhe-box{
     background:#f3f4f6;
