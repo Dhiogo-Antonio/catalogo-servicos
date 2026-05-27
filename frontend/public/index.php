@@ -48,64 +48,37 @@
 
         <div class="hero-text">
 
-            <span>
-                Plataforma
-            </span>
+            <span>Plataforma</span>
 
-            <h1>
-                Encontre profissionais
-                para qualquer serviço
-            </h1>
+            <h1>Encontre profissionais para qualquer serviço</h1>
 
-            <p>
-                Contrate designers, desenvolvedores,
-                especialistas em marketing e diversos
-                profissionais para seu projeto.
-            </p>
-
-
-
-           
-
-
+            <p>Contrate designers, desenvolvedores, especialistas em marketing e diversos profissionais para seu projeto.</p>
 
             <div class="hero-info">
 
                 <div>
 
-                    <h3>
-                        +10k
-                    </h3>
+                    <h3>+10k</h3>
 
-                    <p>
-                        Serviços publicados
-                    </p>
+                    <p>Serviços publicados</p>
 
                 </div>
 
 
                 <div>
 
-                    <h3>
-                        +5k
-                    </h3>
+                    <h3>+5k</h3>
 
-                    <p>
-                        Prestadores ativos
-                    </p>
+                    <p>Prestadores ativos</p>
 
                 </div>
 
 
                 <div>
 
-                    <h3>
-                        98%
-                    </h3>
+                    <h3>98%</h3>
 
-                    <p>
-                        Clientes satisfeitos
-                    </p>
+                    <p>Clientes satisfeitos</p>
 
                 </div>
 
@@ -127,9 +100,7 @@
                         Desenvolvimento Web
                     </h4>
 
-                    <p>
-                        A partir de R$ 500
-                    </p>
+                    <p>A partir de R$ 500</p>
 
                 </div>
 
@@ -145,13 +116,9 @@
 
                 <div class="floating-card card-2">
 
-                    <h4>
-                        Design UI/UX
-                    </h4>
+                    <h4>Design UI/UX</h4>
 
-                    <p>
-                        A partir de R$ 250
-                    </p>
+                    <p>A partir de R$ 250</p>
 
                 </div>
 
