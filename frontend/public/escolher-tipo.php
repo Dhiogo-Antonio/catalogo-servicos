@@ -70,8 +70,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             padding:30px;
 
-            background:#f5f5f5;
-            color:#1e3a8a;
+            background:#11172a;
+            color:#fff;
         }
 
         .content{
@@ -82,7 +82,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         .titulo{
             text-align:center;
             margin-bottom:60px;
-            color:#1e3a8a;
+            color:#fff;
         }
 
         .titulo h1{
@@ -93,7 +93,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         .titulo p{
             font-size:19px;
-            color:#1e3a8a;
+            color:#94a3b8;
         }
 
         .container{
@@ -124,7 +124,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             backdrop-filter:blur(18px);
 
             border:
-            1px solid rgba(255,255,255,.15);
+            1px solid #fff;
 
             overflow:hidden;
 
@@ -192,46 +192,27 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             rgba(255,255,255,.12);
 
             border:
-            1px solid #1e3a8a;
+            1px solid #fff ;
 
-            color:#1e3a8a;
+            color:#fff;
         }
 
         .card h2{
             font-size:34px;
-            color:#1e3a8a;
+            color:#fff;
             margin-bottom:18px;
         }
 
         .card p{
-            color:#64748b;
+            color:#94a3b8;
             line-height:1.8;
             font-size:16px;
         }
 
-        .tag{
-            display:inline-block;
-
-            margin-top:30px;
-
-            padding:12px 20px;
-
-            border-radius:999px;
-
-            background:
-            rgba(255,255,255,.12);
-
-            color:#222;
-
-            font-size:14px;
-            font-weight:bold;
-
-            border:
-            1px solid rgba(255,255,255,.1);
-        }
 
 
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
@@ -270,7 +251,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 >
 
                     <div class="icon">
-                        <img src="../img/prestador.png" alt="" width="50px">
+                        <i class="fa-solid fa-user-tie"></i>
                     </div>
 
                     <h2>
@@ -312,7 +293,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 >
 
                     <div class="icon">
-                        <img src="../img/maleta.png" alt="" width="50px">
+                        <i class="fa-solid fa-briefcase"></i>
                     </div>
 
                     <h2>
