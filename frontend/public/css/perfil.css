@@ -15,8 +15,9 @@ body {
 
 
 
-.btn-back {
-    position: absolute;
+    .btn-back {
+    position: fixed;
+
     top: 25px;
     left: 25px;
 
@@ -35,6 +36,9 @@ body {
     text-decoration: none;
 
     transition: 0.3s;
+
+    z-index: 9999;
+    box-shadow: 0 8px 20px rgba(0,0,0,.12);
 }
 
 .btn-back:hover {
