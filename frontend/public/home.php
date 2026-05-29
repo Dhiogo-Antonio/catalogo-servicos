@@ -205,10 +205,6 @@ if (!empty($_SESSION['usuario'])) {
 
     <div class="categorias-topo">
 
-        <h2 class="section-title">
-            Serviços em destaque
-        </h2>
-
         <button class="btn-categorias" onclick="toggleCategorias()">
             Categorias
             <i class="fa-solid fa-chevron-down" id="icon-main"></i>
@@ -238,7 +234,6 @@ if (!empty($_SESSION['usuario'])) {
 
 </section>
 
-    <hr style="color: #111827; max-width: 100%; margin-left: 0.5rem; margin-bottom: 2rem;">
 
     <section class="servicos categorias-menu" id="servicos">
 
