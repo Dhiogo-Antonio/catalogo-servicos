@@ -5,32 +5,31 @@ session_start();
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/database.php";
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ContratacaoController.php";
 
-$controller = new ContratacaoController($pdo);
+
+$contratacaoController = new ContratacaoController($pdo);
 
 $prestadorId = $_SESSION['usuario']['id'];
 
 if (isset($_GET['acao'], $_GET['id'])) {
 
-    $status = null;
+    $id = $_GET['id'];
 
     if ($_GET['acao'] === 'aceitar') {
 
-        $status = 'aceito';
+        $contratacaoController->atualizarStatus(
+            $id,
+            'aceito'
+        );
 
     } elseif ($_GET['acao'] === 'recusar') {
 
-        $status = 'recusado';
+        $contratacaoController->deletar($id);
 
     } elseif ($_GET['acao'] === 'concluir') {
 
-        $status = 'concluido';
-    }
-
-    if ($status !== null) {
-
-        $controller->atualizarStatus(
-            $_GET['id'],
-            $status
+        $contratacaoController->atualizarStatus(
+            $id,
+            'concluido'
         );
     }
 
@@ -38,7 +37,7 @@ if (isset($_GET['acao'], $_GET['id'])) {
     exit;
 }
 
-$contratos = $controller->listarParaPrestador($prestadorId);
+$contratos = $contratacaoController->listarParaPrestador($prestadorId);
 
 ?>
 
@@ -85,7 +84,12 @@ $contratos = $controller->listarParaPrestador($prestadorId);
         <div class="cliente">
 
             <div class="icon-cliente">
-                <i class="fa-solid fa-user"></i>
+                <img
+        src="<?= !empty($cliente['foto'])
+            ? '../../uploads/' . $cliente['foto']
+            : '../../img/user.jpg' ?>"
+        alt="Cliente"
+        class="foto-cliente">
             </div>
 
             <div class="info-cliente">
@@ -129,7 +133,9 @@ $contratos = $controller->listarParaPrestador($prestadorId);
 
     <a
         href="?acao=recusar&id=<?= $contrato['id'] ?>"
-        class="btn-acao btn-recusar">
+        class="btn-acao btn-recusar"
+        onclick="return confirmarRecusa()">
+        
 
         <i class="fa-solid fa-xmark"></i>
         Recusar
@@ -184,3 +190,4 @@ $contratos = $controller->listarParaPrestador($prestadorId);
 
 </body>
 </html>
+<script src="../js/notificacoes-prestador.js"></script>

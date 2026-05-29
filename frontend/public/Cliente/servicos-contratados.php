@@ -13,7 +13,7 @@ if (!isset($_SESSION['usuario'])) {
 $clienteId = $_SESSION['usuario']['id'];
 
 
-/* BUSCA SERVIÇOS CONTRATADOS */
+
 
 $sql = "
     SELECT
@@ -68,7 +68,7 @@ $contratacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
 
-    <a href="../perfil.php" class="btn-back">
+    <a href="../home.php" class="btn-back">
         <i class="fa-solid fa-arrow-left"></i>
     </a>
 
@@ -96,33 +96,47 @@ $contratacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     <div class="card">
 
+                    
+
                         <div class="top-card">
 
-                            <img
-                                src="<?= !empty($c['foto']) ? '../' . $c['foto'] : '../img/user.jpg' ?>"
-                                class="foto">
+    <img
+        src="<?= !empty($c['foto']) ? '../' . $c['foto'] : '../img/user.jpg' ?>"
+        class="foto">
 
-                            <div>
+    <div class="content-top">
 
-                                <span class="prestador">
+        <div class="header-servico">
 
-                                    <?= htmlspecialchars($c['prestador']) ?>
+            <div>
 
-                                </span>
+                <span class="prestador">
+                    <?= htmlspecialchars($c['prestador']) ?>
+                </span>
 
-                                <h2>
+                <h2>
+                    <?= htmlspecialchars($c['nome_servico']) ?>
+                </h2>
 
-                                    <?= htmlspecialchars($c['nome_servico']) ?>
+            </div>
 
-                                </h2>
+            <a 
+                href="deletar-contratacao.php?id=<?= $c['id'] ?>"
+                class="btn-delete"
+                onclick="return confirm('Deseja remover esta contratação?')"
+            >
+                <i class="fa-solid fa-trash"></i>
+            </a>
 
-                                <div class="status <?= $c['status'] ?>">
-                                    <?= ucfirst($c['status']) ?>
-                                </div>
+        </div>
 
-                            </div>
+        <div class="status <?= $c['status'] ?>">
+            <?= ucfirst($c['status']) ?>
+        </div>
 
-                        </div>
+    </div>
+
+</div>
 
 
                         <div class="info-area">
@@ -181,6 +195,8 @@ $contratacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <?= htmlspecialchars($c['localizacao']) ?>
 
                         </div>
+
+                        
 
 
 

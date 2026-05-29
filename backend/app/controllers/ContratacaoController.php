@@ -32,14 +32,29 @@ public function atualizarStatus($id, $status)
         ->atualizarStatus($id, $status);
 }
 
+public function atualizarMensagem($id, $mensagem){
+    return $this->contratacaoModel->atualizarMensagem($id, $mensagem);
+}
+
     public function listarPorCliente($clienteId) {
 
         return $this->contratacaoModel->listarPorCliente($clienteId);
     }
 
-    public function contarPendentes($prestadorId)
+    public function contarPendentesPrestador($prestadorId)
 {
     return $this->contratacaoModel
-        ->contarPendentes($prestadorId);
+        ->contarPendentesPrestador($prestadorId);
+}
+
+public function contarPendentesCliente($clienteId)
+{
+    return $this->contratacaoModel
+        ->contarNotificacoesCliente($clienteId);
+}
+
+public function deletar($id)
+{
+    return $this->contratacaoModel->deletar($id);
 }
 }

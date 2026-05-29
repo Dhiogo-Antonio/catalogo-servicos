@@ -28,17 +28,27 @@ $categoriaId = $_GET['categoria'] ?? null;
 $servicos = $servicoController->buscarFiltrados($q, $categoriaId);
 
 
+
+
 $notificacoes = 0;
 
-if (
-    !empty($_SESSION['usuario']) &&
-    $_SESSION['usuario']['tipo'] === 'prestador'
-) {
+if (!empty($_SESSION['usuario'])) {
 
     $contratacaoController = new ContratacaoController($pdo);
 
-    $notificacoes = $contratacaoController
-        ->contarPendentes($_SESSION['usuario']['id']);
+    if ($_SESSION['usuario']['tipo'] === 'prestador') {
+
+        $notificacoes = $contratacaoController
+            ->contarPendentesPrestador($_SESSION['usuario']['id']);
+    }
+
+    else {
+
+        $notificacoes = $contratacaoController
+            ->contarPendentesCliente(
+                $_SESSION['usuario']['id']
+            );
+    }
 }
 
 ?>
@@ -92,6 +102,7 @@ if (
 
                 <input
                     type="text"
+                    id="searchInput"
                     name="q"
                     placeholder="Buscar serviços"
                     value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
@@ -165,7 +176,7 @@ if (
                     Publique um serviço e comece a receber propostas de clientes agora mesmo.
                 </p>
 
-                <a href="prestador/criar-servico.php" class="btn-recomendacao">
+                <a href="prestador/servicos/meus-servicos.php" class="btn-recomendacao">
                     Criar serviço
                 </a>
 
@@ -173,7 +184,7 @@ if (
 
                 <h3>
                     <i class="fa-solid fa-briefcase"></i>
-                    Encontre seu primeiro serviço
+                    Contrate o primeiro profissional
                 </h3>
 
                 <p>
@@ -219,7 +230,7 @@ if (
 
     <hr style="color: #111827; max-width: 100%; margin-left: 0.5rem; margin-bottom: 2rem;">
 
-    <section class="servicos categorias-menu">
+    <section class="servicos categorias-menu" id="servicos">
 
 
 
@@ -227,7 +238,7 @@ if (
 
     <?php foreach ($servicos as $servico): ?>
 
-        <div class="card-servico">
+        <div class="card-servico" data-nome="<?= strtolower($servico['nome_servico']) ?>" data-prestador="<?= strtolower($servico['prestador']) ?>" data-descricao="<?= strtolower($servico['descricao']) ?>">
 
             <div class="top-card">
 
@@ -436,63 +447,4 @@ if (
 </body>
 
 </html>
-<script>
-    function abrirModalServico(
-        nome,
-        prestador,
-        descricao,
-        prazo,
-        preco,
-        localizacao,
-        foto
-    ) {
-
-        document.getElementById('modal-titulo').innerText = nome;
-
-        document.getElementById('modal-prestador').innerText = prestador;
-
-        document.getElementById('modal-descricao').innerText = descricao;
-
-        document.getElementById('modal-prazo').innerText = prazo + ' dias';
-
-        document.getElementById('modal-preco').innerText =
-            'R$ ' + parseFloat(preco).toFixed(2);
-
-        document.getElementById('modal-localizacao').innerText =
-            localizacao;
-
-        document.getElementById('modal-foto').src = foto;
-
-        document.getElementById('modalServico').style.display = 'flex';
-    }
-
-    function fecharModalServico() {
-
-        document.getElementById('modalServico').style.display = 'none';
-    }
-
-    function toggleCategorias() {
-        const dropdown = document.getElementById('categoriasDropdown');
-        dropdown.classList.toggle('ativo');
-    }
-
-    function toggleExpandir(event) {
-        event.stopPropagation();
-
-        const extra = document.getElementById('categoriasExtra');
-        const icon = document.getElementById('icon-expand');
-
-        extra.classList.toggle('ativo');
-        icon.classList.toggle('fa-rotate-180');
-    }
-
-    // fecha ao clicar fora
-    document.addEventListener('click', function(e) {
-        const menu = document.getElementById('categoriasDropdown');
-        const btn = document.querySelector('.btn-categorias');
-
-        if (!menu.contains(e.target) && !btn.contains(e.target)) {
-            menu.classList.remove('ativo');
-        }
-    });
-</script>
+<script src="js/home.js"></script>

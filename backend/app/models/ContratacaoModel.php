@@ -70,6 +70,22 @@ public function atualizarStatus($id, $status)
     ]);
 }
 
+public function atualizarMensagem($id, $mensagem)
+{
+    $sql = "
+        UPDATE contratacoes
+        SET mensagem = ?
+        WHERE id = ?
+    ";
+
+    $stmt = $this->pdo->prepare($sql);
+
+    return $stmt->execute([
+        $mensagem,
+        $id
+    ]);
+}
+
    public function listarPorCliente($clienteId) {
 
     $sql = "SELECT
@@ -92,7 +108,7 @@ public function atualizarStatus($id, $status)
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-public function contarPendentes($prestadorId)
+public function contarPendentesPrestador($prestadorId)
 {
     $sql = "SELECT COUNT(*) as total
             FROM contratacoes c
@@ -108,6 +124,37 @@ public function contarPendentes($prestadorId)
     $stmt->execute([$prestadorId]);
 
     return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+}
+
+public function contarNotificacoesCliente($clienteId)
+{
+    $sql = "
+        SELECT COUNT(*) as total
+        FROM contratacoes
+        WHERE cliente_id = ?
+        AND (
+            status = 'aceito'
+            OR status = 'recusado'
+            OR status = 'concluido'
+        )
+    ";
+
+    $stmt = $this->pdo->prepare($sql);
+
+    $stmt->execute([$clienteId]);
+
+    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $resultado['total'];
+}
+
+public function deletar($id)
+{
+    $sql = "DELETE FROM contratacoes WHERE id = ?";
+
+    $stmt = $this->pdo->prepare($sql);
+
+    return $stmt->execute([$id]);
 }
 }
 ?>

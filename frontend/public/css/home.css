@@ -361,6 +361,9 @@ h3 i {
     box-shadow: 0 4px 15px rgba(0,0,0,.06);
 
     transition: transform .3s, box-shadow .3s;
+    transition:
+        opacity .3s ease,
+        transform .3s ease;
 }
 
 

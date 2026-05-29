@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -263,25 +259,4 @@
 
 </body>
 </html>
-<script>
-    const scrollIndicator = document.getElementById("scrollIndicator");
-
-window.addEventListener("scroll", () => {
-
-    if(window.scrollY > 80){
-        scrollIndicator.classList.add("hide");
-    }else{
-        scrollIndicator.classList.remove("hide");
-    }
-
-});
-
-scrollIndicator.addEventListener("click", () => {
-
-    window.scrollTo({
-        top: window.innerHeight,
-        behavior: "smooth"
-    });
-
-});
-</script>
+<script src="js/index.js"></script>
