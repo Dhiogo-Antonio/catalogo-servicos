@@ -4,6 +4,12 @@ session_start();
 
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/database.php";
 
+if (!isset($_SESSION['usuario'])) {
+    header("Location: index.php");
+    exit;
+}
+
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $tipo = $_POST['tipo'];

@@ -1,3 +1,7 @@
+<?php
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -25,8 +29,8 @@
     </div>
 
     <div class="auth">
-        <a href="#" class="btn-login">Entrar</a>
-        <a href="#" class="btn-register">Cadastrar</a>
+        <a href="login.php" class="btn-login">Entrar</a>
+        <a href="cadastro.php" class="btn-register">Cadastrar</a>
     </div>
 
 </header>
@@ -93,7 +97,6 @@
 
     </div>
 
-    <!-- COLOQUE ISSO NO FINAL DA HERO -->
 <div class="scroll-indicator" id="scrollIndicator">
     <i class="fa-solid fa-chevron-down"></i>
 </div>
@@ -168,6 +171,95 @@
     </div>
 
 </section>
+
+<hr>
+
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <div class="footer-brand">
+
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                </div>
+
+                <div class="logo-text">
+                    <span class="logo-name">ProServiços</span>
+                </div>
+            </div>
+
+            <p>
+                Plataforma moderna para conectar clientes e profissionais
+                de forma rápida, segura e eficiente.
+            </p>
+
+            <div class="footer-socials">
+
+                <a href="#">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="footer-links">
+
+            <div class="footer-column">
+                <h3>Plataforma</h3>
+
+                <a href="#">Como funciona</a>
+                <a href="#">Explorar serviços</a>
+                <a href="#">Profissionais</a>
+                <a href="#">Categorias</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>Empresa</h3>
+
+                <a href="#">Sobre nós</a>
+                <a href="#">Contato</a>
+                <a href="#">Blog</a>
+                <a href="#">Carreiras</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>Suporte</h3>
+
+                <a href="#">Central de ajuda</a>
+                <a href="#">Termos de uso</a>
+                <a href="#">Privacidade</a>
+                <a href="#">Segurança</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 ProServiços — Todos os direitos reservados.
+        </p>
+
+    </div>
+
+</footer>
 
 </body>
 </html>

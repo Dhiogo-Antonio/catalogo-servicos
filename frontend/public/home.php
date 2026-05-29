@@ -7,6 +7,13 @@ require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/S
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/CategoriaController.php";
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ContratacaoController.php";
 
+
+if (!isset($_SESSION['usuario'])) {
+    header("Location: index.php");
+    exit;
+}
+
+
 $categoriaController = new CategoriaController($pdo);
 $categorias = $categoriaController->listar();
 
