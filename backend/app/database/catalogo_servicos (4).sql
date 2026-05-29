@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27/05/2026 às 12:37
+-- Tempo de geração: 29/05/2026 às 18:46
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -59,16 +59,6 @@ CREATE TABLE `contratacoes` (
   `criado_em` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Despejando dados para a tabela `contratacoes`
---
-
-INSERT INTO `contratacoes` (`id`, `cliente_id`, `servico_id`, `mensagem`, `status`, `criado_em`) VALUES
-(1, 1, 9, 'yshdsjdhsjd', 'Pendente', '2026-05-22 12:09:38'),
-(2, 1, 9, 'yshdsjdhsjd', 'Pendente', '2026-05-22 12:12:12'),
-(3, 1, 8, 'aidjkskskcdihvdvivdnkfdvndkndkncskcnsjcnsjcnskcnsk', 'Pendente', '2026-05-22 12:41:01'),
-(4, 1, 8, 'dnbcns,cnscm', 'Pendente', '2026-05-22 12:48:03');
-
 -- --------------------------------------------------------
 
 --
@@ -94,7 +84,7 @@ CREATE TABLE `servicos` (
 INSERT INTO `servicos` (`id`, `usuario_id`, `categoria_id`, `nome_servico`, `descricao`, `preco`, `prazo`, `localizacao`, `criado_em`) VALUES
 (5, 6, 3, 'Manutenção de servidores', 'sdsds', 45.00, 10, 'Paraguaçu-Paulista', '2026-05-20 10:59:55'),
 (6, 6, 3, 'Banco de Dados', 'Criar banco de dados', 5000.00, 2, 'Paraguaçu-Paulista', '2026-05-20 12:12:35'),
-(7, 6, 1, 'Design', 'Ofereço um serviço de design criativo e estratégico voltado para marcas que querem se destacar de verdade. Desenvolvemos identidades visuais modernas, materiais gráficos, layouts para redes sociais, apresentações e peças digitais com foco em estética, cla', 100.00, 1, 'Paraguaçu-Paulista', '2026-05-20 13:28:47'),
+(7, 6, 1, 'Design', 'Ofereço um serviço de design criativo e estratégico voltado para marcas que querem se destacar de verdade. Desenvolvemos identidades visuais modernas, materiais gráficos, layouts parahsjs redes sociais, apresentações e peças digitais com foco em estética,', 100.00, 1, 'Paraguaçu-Paulista', '2026-05-20 13:28:47'),
 (8, 8, 2, 'Atendente', 'Atendente dedicado e comunicativo, focado em oferecer um atendimento rápido, educado e eficiente. Experiência em suporte ao cliente, resolução de dúvidas, organização de pedidos e auxílio durante todo o processo de atendimento. Comprometido em garantir um', 20.00, 5, 'Sapezal', '2026-05-22 11:16:25'),
 (9, 8, 3, 'Desenvolvimento Web', 'Desenvolvedor web especializado na criação de sites e sistemas modernos, responsivos e funcionais. Experiência com PHP, HTML, CSS, JavaScript e bancos de dados, desenvolvendo soluções organizadas, seguras e intuitivas. Focado em performance, experiência d', 1.00, 365, 'New-York', '2026-05-22 11:17:55'),
 (30, 13, 1, 'Criação de Logo Profissional', 'Desenvolvimento de logos modernas para empresas e marcas.', 120.00, 3, 'São Paulo - SP', '2026-05-27 10:33:19'),
@@ -138,11 +128,12 @@ INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `telefone`, `tipo`, `cri
 (10, 'Espanha', 'espanha@gmail.com', '1234', '999090967', 'prestador', '2026-05-20 12:51:57', NULL),
 (11, 'França', 'franca@gmail', '1234', '18999846758', 'prestador', '2026-05-20 12:59:19', NULL),
 (12, 'Paraguai', 'paraguai@gmail', '1234', '18999846899', 'prestador', '2026-05-20 13:04:40', NULL),
-(13, 'Lucas Designer', 'lucas@proservicos.com', '123456', NULL, 'prestador', '2026-05-27 10:30:00', 'https://i.pravatar.cc/150?img=11'),
-(14, 'Marina Social Media', 'marina@proservicos.com', '123456', NULL, 'prestador', '2026-05-27 10:30:00', 'https://i.pravatar.cc/150?img=32'),
-(15, 'Carlos Dev', 'carlos@proservicos.com', '123456', NULL, 'prestador', '2026-05-27 10:30:00', 'https://i.pravatar.cc/150?img=15'),
-(16, 'Fernanda Consultora', 'fernanda@proservicos.com', '123456', NULL, 'prestador', '2026-05-27 10:30:00', 'https://i.pravatar.cc/150?img=47'),
-(17, 'Rafael Técnico', 'rafael@proservicos.com', '123456', NULL, 'prestador', '2026-05-27 10:30:00', 'https://i.pravatar.cc/150?img=20');
+(13, 'Lucas Designer', 'lucas@proservicos.com', '123456', NULL, 'prestador', '2026-05-27 10:30:00', 'uploads/user_13.jpg'),
+(14, 'Marina Social Media', 'marina@proservicos.com', '123456', NULL, 'prestador', '2026-05-27 10:30:00', 'uploads/user_14.jpg'),
+(15, 'Carlos Dev', 'carlos@proservicos.com', '123456', NULL, 'prestador', '2026-05-27 10:30:00', 'uploads/user_15.jpg'),
+(16, 'Fernanda Consultora', 'fernanda@proservicos.com', '123456', NULL, 'prestador', '2026-05-27 10:30:00', 'uploads/user_16.jpg'),
+(17, 'Rafaela Técnico', 'rafaela@proservicos.com', '123456', NULL, 'prestador', '2026-05-27 10:30:00', 'uploads/user_17.jpg'),
+(18, 'Aidan', 'aidan@gmail', '1234', '1899984674', 'cliente', '2026-05-27 17:27:15', NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -189,7 +180,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de tabela `contratacoes`
 --
 ALTER TABLE `contratacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de tabela `servicos`
@@ -201,7 +192,7 @@ ALTER TABLE `servicos`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Restrições para tabelas despejadas
