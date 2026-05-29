@@ -203,6 +203,8 @@ if (!empty($_SESSION['usuario'])) {
 
     <section class="categorias-menu">
 
+    <div class="categorias-topo">
+
         <h2 class="section-title">
             Serviços em destaque
         </h2>
@@ -212,21 +214,29 @@ if (!empty($_SESSION['usuario'])) {
             <i class="fa-solid fa-chevron-down" id="icon-main"></i>
         </button>
 
-        <div class="categorias-dropdown" id="categoriasDropdown">
+    </div>
 
-            <a href="home.php" class="categoria-item">Todas</a>
+    <div class="categorias-dropdown" id="categoriasDropdown">
 
-            <?php foreach ($categorias as $cat): ?>
-                <a href="home.php?categoria=<?= $cat['id'] ?>" class="categoria-item">
-                    <?= htmlspecialchars($cat['nome']) ?>
-                </a>
-            <?php endforeach; ?>
+        <a href="home.php" class="categoria-item">
+            Todas
+        </a>
 
+        <?php foreach ($categorias as $cat): ?>
 
+            <a
+                href="home.php?categoria=<?= $cat['id'] ?>"
+                class="categoria-item">
 
-        </div>
+                <?= htmlspecialchars($cat['nome']) ?>
 
-    </section>
+            </a>
+
+        <?php endforeach; ?>
+
+    </div>
+
+</section>
 
     <hr style="color: #111827; max-width: 100%; margin-left: 0.5rem; margin-bottom: 2rem;">
 
