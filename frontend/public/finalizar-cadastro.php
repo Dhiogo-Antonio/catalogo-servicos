@@ -6,12 +6,6 @@ require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/data
 
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/UsuarioController.php";
 
-if (!isset($_SESSION['usuario'])) {
-    header("Location: index.php");
-    exit;
-}
-
-
 
 if(!isset($_SESSION['cadastro'])){
 

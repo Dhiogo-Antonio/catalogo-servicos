@@ -413,6 +413,11 @@ body{
     box-shadow:0 10px 30px rgba(0,0,0,.12);
 }
 
+.vazio i{
+    font-size:48px;
+    margin-bottom:20px;
+}
+
 .vazio h2{
     margin-bottom:10px;
 }
