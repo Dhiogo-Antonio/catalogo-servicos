@@ -6,6 +6,7 @@ require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/data
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ServicoController.php";
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/CategoriaController.php";
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ContratacaoController.php";
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/frontend/public/auth.php";
 
 
 $categoriaController = new CategoriaController($pdo);

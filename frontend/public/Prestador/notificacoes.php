@@ -6,6 +6,7 @@ require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/data
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ContratacaoController.php";
 
 
+
 $contratacaoController = new ContratacaoController($pdo);
 
 $prestadorId = $_SESSION['usuario']['id'];

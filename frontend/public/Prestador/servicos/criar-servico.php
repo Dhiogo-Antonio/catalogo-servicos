@@ -4,6 +4,7 @@ session_start();
 
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/database.php";
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ServicoController.php";
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/middleware/auth.php";
 
 $servicoController = new ServicoController($pdo);
 

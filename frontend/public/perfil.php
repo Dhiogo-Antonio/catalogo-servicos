@@ -7,14 +7,11 @@ require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/U
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ServicoController.php";
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/services/PerfilService.php";
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ContratacaoController.php";
+require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/frontend/public/auth.php";
 
 $contratacaoController = new ContratacaoController($pdo);
 
-if (!isset($_SESSION['usuario'])) {
 
-    header("Location: index.php");
-    exit;
-}
 
 $usuarioId = $_SESSION['usuario']['id'];
 
