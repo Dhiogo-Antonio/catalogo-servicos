@@ -58,7 +58,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $avaliacao = $_POST['avaliacao'];
     $localizacao = $_POST['localizacao'];
 
-    $ServicoController->cadastrar($nome_servico, $descricao, $preco, $categoria_id, $prazo, $disponibilidade, $avaliacao, $localizacao);
-    header('Location: ../../../index.php');
+    // $ServicoController->cadastrar($nome_servico, $descricao, $preco, $categoria_id, $prazo, $disponibilidade, $avaliacao, $localizacao);
+    // header('Location: ../../../index.php');
 }
 ?>

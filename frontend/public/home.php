@@ -33,16 +33,12 @@ if (!empty($_SESSION['usuario'])) {
 
     if ($_SESSION['usuario']['tipo'] === 'prestador') {
 
-        $notificacoes = $contratacaoController
-            ->contarPendentesPrestador($_SESSION['usuario']['id']);
+        $notificacoes = $contratacaoController->contarPendentesPrestador($_SESSION['usuario']['id']);
     }
 
     else {
 
-        $notificacoes = $contratacaoController
-            ->contarPendentesCliente(
-                $_SESSION['usuario']['id']
-            );
+        $notificacoes = $contratacaoController->contarPendentesCliente($_SESSION['usuario']['id']);
     }
 }
 
