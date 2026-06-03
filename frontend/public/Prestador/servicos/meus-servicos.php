@@ -4,7 +4,7 @@ session_start();
 
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/database/database.php";
 require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/controllers/ServicoController.php";
-require_once "C:/Turma2/xampp/htdocs/catalogo-servicos/backend/app/middleware/auth.php";
+
 
 
 if (!isset($_SESSION['usuario'])) {
@@ -122,7 +122,8 @@ $servicos = $servicoController->listarPorPrestador($prestadorId);
             Editar
         </button>
 
-        <a href="deletar-servico.php?id=<?= $servico['id'] ?>">
+        <a href="deletar-servico.php?id=<?= $servico['id'] ?>"
+        onclick="return confirm('Tem certeza que deseja excluir este serviço?')">
             Excluir
         </a>
 

@@ -87,5 +87,13 @@ class ServicoController
         return $this->servicoModel->deletar($id);
     }
 
+    public function deletarServico($id, $usuarioId)
+{
+    return $this->servicoModel->deletarServico(
+        $id,
+        $usuarioId
+    );
+}
+
     
 }

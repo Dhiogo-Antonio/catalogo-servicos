@@ -186,6 +186,20 @@ WHERE servicos.id = ?";
         return $stmt->execute([$id]);
     }
 
+
+    public function deletarServico($id, $usuarioId)
+{
+    $stmt = $this->pdo->prepare("
+        DELETE FROM servicos
+        WHERE id = ?
+        AND usuario_id = ?
+    ");
+
+    return $stmt->execute([
+        $id,
+        $usuarioId
+    ]);
+}
     
 
 }
