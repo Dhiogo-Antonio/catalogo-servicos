@@ -137,6 +137,12 @@ $contratacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
 </div>
+<div class="localizacao">
+
+                            <i class="fa-solid fa-map-marker-alt"></i>
+                            <?= htmlspecialchars($c['localizacao']) ?>
+
+                        </div>
 
 
                         <div class="info-area">
@@ -158,6 +164,8 @@ $contratacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                             </div>
 
+                            
+
 
                             <div class="info-box">
 
@@ -169,6 +177,7 @@ $contratacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                                 </strong>
 
+                
                             </div>
 
                         </div>
@@ -189,12 +198,7 @@ $contratacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </div>
 
 
-                        <div class="localizacao">
-
-                            <i class="fa-solid fa-map-marker-alt"></i>
-                            <?= htmlspecialchars($c['localizacao']) ?>
-
-                        </div>
+                        
 
                         
 

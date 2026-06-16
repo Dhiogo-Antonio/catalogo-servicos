@@ -24,7 +24,12 @@ if (isset($_GET['acao'], $_GET['id'])) {
 
     } elseif ($_GET['acao'] === 'recusar') {
 
-        $contratacaoController->deletar($id);
+    $contratacaoController->atualizarStatus(
+        $id,
+        'recusado'
+    );
+
+
 
     } elseif ($_GET['acao'] === 'concluir') {
 
